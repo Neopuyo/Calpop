@@ -15,6 +15,12 @@
 		1D2CCC382C30102A00C7126D /* KeyButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2CCC372C30102A00C7126D /* KeyButtonView.swift */; };
 		1D6120862C39455400243CBB /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6120852C39455400243CBB /* RootView.swift */; };
 		1D6120892C3950F700243CBB /* ComputePadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6120882C3950F700243CBB /* ComputePadView.swift */; };
+		1DC147B52C42650E004B983D /* PoppingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC147B42C42650E004B983D /* PoppingView.swift */; };
+		1DC147B82C426633004B983D /* PoppingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC147B72C426633004B983D /* PoppingModel.swift */; };
+		1DC147BA2C426940004B983D /* PopData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC147B92C426940004B983D /* PopData.swift */; };
+		1DC147BC2C428035004B983D /* PopScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC147BB2C428035004B983D /* PopScreenView.swift */; };
+		1DC147BE2C4283AA004B983D /* PopPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC147BD2C4283AA004B983D /* PopPadView.swift */; };
+		1DC147C02C42879F004B983D /* PopKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC147BF2C42879F004B983D /* PopKeyView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +33,12 @@
 		1D2CCC372C30102A00C7126D /* KeyButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyButtonView.swift; sourceTree = "<group>"; };
 		1D6120852C39455400243CBB /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		1D6120882C3950F700243CBB /* ComputePadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputePadView.swift; sourceTree = "<group>"; };
+		1DC147B42C42650E004B983D /* PoppingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoppingView.swift; sourceTree = "<group>"; };
+		1DC147B72C426633004B983D /* PoppingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoppingModel.swift; sourceTree = "<group>"; };
+		1DC147B92C426940004B983D /* PopData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopData.swift; sourceTree = "<group>"; };
+		1DC147BB2C428035004B983D /* PopScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopScreenView.swift; sourceTree = "<group>"; };
+		1DC147BD2C4283AA004B983D /* PopPadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopPadView.swift; sourceTree = "<group>"; };
+		1DC147BF2C42879F004B983D /* PopKeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopKeyView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +73,7 @@
 			children = (
 				1D2CCC242C2FF87300C7126D /* poppingApp.swift */,
 				1D2CCC322C2FF9A100C7126D /* Views */,
+				1DC147B62C4265ED004B983D /* Models */,
 				1D2CCC282C2FF87600C7126D /* Assets.xcassets */,
 				1D2CCC2A2C2FF87600C7126D /* Preview Content */,
 			);
@@ -81,6 +94,7 @@
 				1D6120852C39455400243CBB /* RootView.swift */,
 				1D6120842C39451600243CBB /* LockedFrame */,
 				1D6120872C3950C100243CBB /* ComputePad */,
+				1DC147B32C4264BA004B983D /* Popping */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -101,6 +115,26 @@
 				1D6120882C3950F700243CBB /* ComputePadView.swift */,
 			);
 			path = ComputePad;
+			sourceTree = "<group>";
+		};
+		1DC147B32C4264BA004B983D /* Popping */ = {
+			isa = PBXGroup;
+			children = (
+				1DC147B42C42650E004B983D /* PoppingView.swift */,
+				1DC147BB2C428035004B983D /* PopScreenView.swift */,
+				1DC147BD2C4283AA004B983D /* PopPadView.swift */,
+				1DC147BF2C42879F004B983D /* PopKeyView.swift */,
+			);
+			path = Popping;
+			sourceTree = "<group>";
+		};
+		1DC147B62C4265ED004B983D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1DC147B72C426633004B983D /* PoppingModel.swift */,
+				1DC147B92C426940004B983D /* PopData.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,12 +207,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DC147BC2C428035004B983D /* PopScreenView.swift in Sources */,
 				1D6120892C3950F700243CBB /* ComputePadView.swift in Sources */,
+				1DC147BE2C4283AA004B983D /* PopPadView.swift in Sources */,
 				1D2CCC342C2FFA3100C7126D /* LockedFrameView.swift in Sources */,
 				1D2CCC252C2FF87300C7126D /* poppingApp.swift in Sources */,
+				1DC147B82C426633004B983D /* PoppingModel.swift in Sources */,
+				1DC147C02C42879F004B983D /* PopKeyView.swift in Sources */,
 				1D2CCC382C30102A00C7126D /* KeyButtonView.swift in Sources */,
 				1D2CCC362C30059400C7126D /* childView.swift in Sources */,
 				1D6120862C39455400243CBB /* RootView.swift in Sources */,
+				1DC147B52C42650E004B983D /* PoppingView.swift in Sources */,
+				1DC147BA2C426940004B983D /* PopData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

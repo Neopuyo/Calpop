@@ -19,8 +19,13 @@ struct RootView: View {
                         }
                         
                         // Pad
-                        NavigationLink(destination: Text("Work in progress - View")) {
-                            Text("Work in progress")
+                        NavigationLink(destination: ComputePadView()) {
+                            Text("ComputePad")
+                        }
+                        
+                        // Popping
+                        NavigationLink(destination: PoppingView()) {
+                            Text("Popping")
                         }
                         
                     }
@@ -39,6 +44,10 @@ struct RootView: View {
                         Text("ComputePad")
                     }
                     
+                    // Popping
+                    NavigationLink(destination: PoppingView()) {
+                        Text("Popping")
+                    }
                 }
             }
             .navigationViewStyle(.stack)
