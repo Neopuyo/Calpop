@@ -8,15 +8,19 @@
 import SwiftUI
 
 struct ChildView: View {
+    
+    let width: CGFloat
+    
     var body: some View {
         ZStack() {
 //          Circle()
 //                .fill(Color.pink)
-            KeyButtonView()
+            KeyButtonView(keyLabel: "5", width:width)
         }
     }
 }
 
+@available(iOS 17, *)
 #Preview(traits: .fixedLayout(width: 300, height: 300)) {
-    ChildView()
+    ChildView(width: 300)
 }
