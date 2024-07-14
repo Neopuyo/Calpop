@@ -13,6 +13,7 @@
 		1D2CCC342C2FFA3100C7126D /* LockedFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2CCC332C2FFA3100C7126D /* LockedFrameView.swift */; };
 		1D2CCC362C30059400C7126D /* childView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2CCC352C30059400C7126D /* childView.swift */; };
 		1D2CCC382C30102A00C7126D /* KeyButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2CCC372C30102A00C7126D /* KeyButtonView.swift */; };
+		1D36B9322C43F38D00DDA278 /* Expression in Frameworks */ = {isa = PBXBuildFile; productRef = 1D36B9312C43F38D00DDA278 /* Expression */; };
 		1D6120862C39455400243CBB /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6120852C39455400243CBB /* RootView.swift */; };
 		1D6120892C3950F700243CBB /* ComputePadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6120882C3950F700243CBB /* ComputePadView.swift */; };
 		1DC147B52C42650E004B983D /* PoppingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC147B42C42650E004B983D /* PoppingView.swift */; };
@@ -46,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D36B9322C43F38D00DDA278 /* Expression in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,6 +155,9 @@
 			dependencies = (
 			);
 			name = popping;
+			packageProductDependencies = (
+				1D36B9312C43F38D00DDA278 /* Expression */,
+			);
 			productName = popping;
 			productReference = 1D2CCC212C2FF87300C7126D /* popping.app */;
 			productType = "com.apple.product-type.application";
@@ -181,6 +186,9 @@
 				Base,
 			);
 			mainGroup = 1D2CCC182C2FF87300C7126D;
+			packageReferences = (
+				1D36B9302C43F38C00DDA278 /* XCRemoteSwiftPackageReference "Expression" */,
+			);
 			productRefGroup = 1D2CCC222C2FF87300C7126D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -424,6 +432,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1D36B9302C43F38C00DDA278 /* XCRemoteSwiftPackageReference "Expression" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nicklockwood/Expression.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.13.8;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1D36B9312C43F38D00DDA278 /* Expression */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1D36B9302C43F38C00DDA278 /* XCRemoteSwiftPackageReference "Expression" */;
+			productName = Expression;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1D2CCC192C2FF87300C7126D /* Project object */;
 }

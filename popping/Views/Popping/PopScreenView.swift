@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PopScreenView: View {
     
-    @Binding var inputLine: String
+    @ObservedObject var popping: PoppingModel
     
     var body: some View {
         ZStack {
@@ -19,9 +19,26 @@ struct PopScreenView: View {
         
             VStack(spacing:0) {
                 Spacer()
-                Text(inputLine)
+                Text(popping.inputLine)
+                    .padding()
                     .lineLimit(1)
                     .frame(maxWidth: .infinity, alignment: .trailing)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 22.0)
+                            .stroke(lineWidth:  2.5)
+                            .foregroundColor(Color.mouikyColorAzurBlueDarker1)
+                    )
+                Text(popping.isError ? "ERROR" : String(popping.result))
+                    .font(.title)
+                    .padding()
+                    .lineLimit(1)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 22.0)
+                            .stroke(lineWidth:  2.5)
+                            .foregroundColor(Color.mouikyColorAzurBlueDarker1)
+                    )
+                
                 Spacer()
             }
         }
@@ -29,5 +46,5 @@ struct PopScreenView: View {
 }
 
 #Preview {
-    PopScreenView(inputLine: .constant("1+1"))
+    PopScreenView(popping: PoppingModel())
 }

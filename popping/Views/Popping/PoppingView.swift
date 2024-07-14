@@ -14,7 +14,7 @@ struct PoppingView: View {
     var body: some View {
         GeometryReader { geo in
             VStack(spacing:0) {
-                PopScreenView(inputLine: $popping.inputLine)
+                PopScreenView(popping: popping)
                     .frame(height: geo.size.height * 0.45)
                 
                 PopPadView(popping: popping, keyGrid: PopData.popKeyGrid)

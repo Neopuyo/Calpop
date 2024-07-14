@@ -35,7 +35,6 @@ struct PopKeyView: View {
     
     var body: some View {
         Button(key.symbol) {
-            print("key [\(key.symbol)]")
             action(key)
         }
         .buttonStyle(PopKeyButton(width: width, keyKind: key.kind))
