@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PopPadView: View {
     
-    @ObservedObject var popping: PoppingModel
+    @EnvironmentObject var popping: PoppingModel
     let keyGrid: [[PopData.PopKey]]
     
     var body: some View {
@@ -50,5 +50,5 @@ struct PopPadView: View {
 
 @available(iOS 17, *)
 #Preview(traits: .fixedLayout(width: 300, height: 300)) {
-    PopPadView(popping: PoppingModel(), keyGrid: PopData.popKeyGrid)
+    PopPadView(keyGrid: PopData.popKeyGrid)
 }

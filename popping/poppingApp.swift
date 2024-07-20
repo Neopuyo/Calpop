@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct poppingApp: App {
+
+    @StateObject private var popping = PoppingModel()
+
     var body: some Scene {
+        
         WindowGroup {
-            RootView()
+            PoppingView()
+                .environmentObject(popping)
         }
     }
 }

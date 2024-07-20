@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PopScreenView: View {
     
-    @ObservedObject var popping: PoppingModel
+    @EnvironmentObject var popping: PoppingModel
     
     var body: some View {
         ZStack {
@@ -46,5 +46,5 @@ struct PopScreenView: View {
 }
 
 #Preview {
-    PopScreenView(popping: PoppingModel())
+    PopScreenView()
 }

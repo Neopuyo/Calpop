@@ -9,15 +9,13 @@ import SwiftUI
 
 struct PoppingView: View {
     
-    @StateObject private var popping = PoppingModel()
-    
     var body: some View {
         GeometryReader { geo in
             VStack(spacing:0) {
-                PopScreenView(popping: popping)
+                PopScreenView()
                     .frame(height: geo.size.height * 0.45)
                 
-                PopPadView(popping: popping, keyGrid: PopData.popKeyGrid)
+                PopPadView(keyGrid: PopData.popKeyGrid)
             }
             .ignoresSafeArea()
         }
