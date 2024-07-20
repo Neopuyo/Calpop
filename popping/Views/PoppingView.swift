@@ -15,7 +15,7 @@ struct PoppingView: View {
                 PopScreenView()
                     .frame(height: geo.size.height * 0.45)
                 
-                PopPadView(keyGrid: PopData.popKeyGrid)
+                PopPadView()
             }
             .ignoresSafeArea()
         }

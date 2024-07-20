@@ -22,8 +22,6 @@ class PoppingModel: ObservableObject {
         case .special:
             specialPressed(key)
             
-        case .empty:
-            return
         default:
             print("🌵 [\(key.kind.rawValue)] key not handled yet")
         }
@@ -31,19 +29,25 @@ class PoppingModel: ObservableObject {
     
     
     private func digitOrMathPressed(_ key: PopData.PopKey) {
-        inputLine.append(key.symbol)
+        guard key != .keyResult else {
+            evaluateExpression()
+            return
+        }
+        inputLine.append(key.stringvalue)
     }
     
+    
     private func specialPressed(_ key: PopData.PopKey) {
-        switch key.symbol {
-        case "AC":
+        switch key {
+        case .keyClear:
             inputLine = ""
-        case "C":
+            result = 0.0
+        case .keyClearEntry:
+            inputLine = ""
+        case .keyDelete:
             guard !inputLine.isEmpty else { return }
             inputLine.remove(at: inputLine.index(before: inputLine.endIndex))
             
-        case "=":
-            evaluateExpression()
         default:
             print("CONTINUE IMPLEMENTING THIS")
         }
