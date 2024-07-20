@@ -1,14 +1,13 @@
 //
-//  PopPadView.swift
+//  PopPadLeftView.swift
 //  popping
 //
-//  Created by Loup Martineau on 13/07/2024.
+//  Created by Loup Martineau on 20/07/2024.
 //
 
 import SwiftUI
 
-struct PopPadView: View {
-    
+struct PopPadLeftView: View {
     @EnvironmentObject var popping: PoppingModel
     let keyGrid: [[PopData.PopKey]] = PopData.popKeyGridLeft
     
@@ -16,13 +15,16 @@ struct PopPadView: View {
         GeometryReader { geo in
             
             if #available(iOS 17.0, *) {
-                Grid {
+                Grid(horizontalSpacing: 0, verticalSpacing: 0) {
                     ForEach(0..<6) { i in
                         GridRow {
                             ForEach(0..<3) { j in
                                 PopKeyView(
                                     key: keyGrid[i][j],
-                                    width: geo.size.width / CGFloat(4),
+                                    size: CGSize(
+                                        width: geo.size.width / CGFloat(3),
+                                        height: geo.size.height / CGFloat(6)
+                                    ),
                                     action: popping.keyPressed
                                 )
                             }
@@ -30,13 +32,16 @@ struct PopPadView: View {
                     }
                 }
             } else {
-                VStack {
+                VStack(spacing:0) {
                     ForEach(0..<6) { i in
-                        HStack {
+                        HStack(spacing:0) {
                             ForEach(0..<3) { j in
                                 PopKeyView(
                                     key: keyGrid[i][j],
-                                    width: geo.size.width / CGFloat(4),
+                                    size: CGSize(
+                                        width: geo.size.width / CGFloat(3),
+                                        height: geo.size.height / CGFloat(6)
+                                    ),
                                     action: popping.keyPressed
                                 )
                             }
@@ -50,5 +55,6 @@ struct PopPadView: View {
 
 @available(iOS 17, *)
 #Preview(traits: .fixedLayout(width: 300, height: 300)) {
-    PopPadView()
+    PopPadLeftView()
+        .environmentObject(PoppingModel())
 }

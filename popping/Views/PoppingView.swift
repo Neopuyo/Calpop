@@ -24,4 +24,5 @@ struct PoppingView: View {
 
 #Preview {
     PoppingView()
+        .environmentObject(PoppingModel())
 }

@@ -47,4 +47,5 @@ struct PopScreenView: View {
 
 #Preview {
     PopScreenView()
+        .environmentObject(PoppingModel())
 }

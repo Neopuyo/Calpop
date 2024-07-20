@@ -80,14 +80,19 @@ class PopData {
         
         // PopKeyKind.memory
         
+        // Later adjustement ?
+        case keyUnknown
+        
         var kind: PopKeyKind {
             switch self {
             case .key0, .key1, .key2, .key3, .key4, .key5, .key6, .key7, .key8, .key9, .keyDot:
                 return .digit
             case .keyPlusSlashMinus:
                 return .digitSpe
-                
-            
+            case .keyDivide, .keyMultiply, .keyMinus, .keyPlus, .keyResult:
+                return .math
+            case .keyClearEntry, .keyClear, .keyDelete, .keyInverse, .keyPower2, .keySquareRoot:
+                return .special
             default:
                 return .unknown
             }
@@ -104,13 +109,13 @@ class PopData {
             case .memory:
                 return Color.mouikyColorButterCup
             default:
-                return Color.mouikyColorHibiscus
+                return Color.mouikyColorTurquoiseBlue
             }
         }
         
         var colorPressed: Color {
             switch self.kind {
-            case .digit:
+            case .digit, .digitSpe:
                 return Color.mouikyColorAzurBlueDarker1
             case .math:
                 return Color.mouikyColorAzurBlueDarker1
