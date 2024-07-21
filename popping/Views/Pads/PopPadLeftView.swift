@@ -20,6 +20,7 @@ struct PopPadLeftView: View {
                         GridRow {
                             ForEach(0..<3) { j in
                                 PopKeyView(
+                                    keyStyle: keyGrid[i][j].sfImageName != "" ? .keySF : .keyString,
                                     key: keyGrid[i][j],
                                     size: CGSize(
                                         width: geo.size.width / CGFloat(3),
@@ -37,6 +38,7 @@ struct PopPadLeftView: View {
                         HStack(spacing:0) {
                             ForEach(0..<3) { j in
                                 PopKeyView(
+                                    keyStyle: keyGrid[i][j].sfImageName != "" ? .keySF : .keyString,
                                     key: keyGrid[i][j],
                                     size: CGSize(
                                         width: geo.size.width / CGFloat(3),

@@ -33,7 +33,7 @@ class PoppingModel: ObservableObject {
             evaluateExpression()
             return
         }
-        inputLine.append(key.stringvalue)
+        inputLine.append(key.stringValue)
     }
     
     

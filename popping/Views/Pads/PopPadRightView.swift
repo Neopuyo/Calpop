@@ -17,6 +17,7 @@ struct PopPadRightView: View {
             VStack(spacing:0) {
                 ForEach(0..<4) { i in
                     PopKeyView(
+                        keyStyle: keyGrid[i].sfImageName != "" ? .keySF : .keyString,
                         key: keyGrid[i],
                         size: CGSize(
                             width: geo.size.width,
@@ -26,6 +27,7 @@ struct PopPadRightView: View {
                     )
                 }
                 PopKeyView(
+                    keyStyle: .keyResult,
                     key: keyGrid[4],
                     size: CGSize(
                         width: geo.size.width,

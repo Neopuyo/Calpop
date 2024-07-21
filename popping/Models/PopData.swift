@@ -16,51 +16,6 @@ class PopData {
         case special
         case memory
         case unknown
-        
-//        var color: Color {
-//            switch self {
-//            case .digit, .digitSpe:
-//                return Color.mouikyColorTurquoiseBlue
-//            case .math:
-//                return Color.mouikyColorBrightGreen
-//            case .special:
-//                return Color.mouikyColorTangerine
-//            case .memory:
-//                return Color.mouikyColorButterCup
-//            default:
-//                return Color.mouikyColorHibiscus
-//            }
-//        }
-        
-//        var colorPressed: Color {
-//            switch self {
-//            case .digit:
-//                return Color.mouikyColorAzurBlueDarker1
-//            case .math:
-//                return Color.mouikyColorAzurBlueDarker1
-//            case .special:
-//                return Color.mouikyColorAzurBlueDarker1
-//            case .memory:
-//                return Color.mouikyColorAzurBlueDarker1
-//            default:
-//                return Color.mouikyColorAzurBlueDarker1
-//            }
-//        }
-        
-//        static func getKindOf(symbol: String) -> PopKeyKind {
-//            switch symbol {
-//            case "":
-//                return .empty
-//            case "0"..."9", " ", ".":
-//                return .digit
-//            case "+", "-", "/", "*", "x":
-//                return .math
-//            case "C", "AC", "=", "+/-":
-//                return .special
-//            default:
-//                return .unknown
-//            }
-//        }
     }
     
     enum PopKey: String {
@@ -79,6 +34,7 @@ class PopData {
         case keyClearEntry, keyClear, keyDelete, keyInverse, keyPower2, keySquareRoot
         
         // PopKeyKind.memory
+        case keyMC, keyMR, keyMplus, keyMminus, keyMS, keyMmenu
         
         // Later adjustement ?
         case keyUnknown
@@ -93,6 +49,8 @@ class PopData {
                 return .math
             case .keyClearEntry, .keyClear, .keyDelete, .keyInverse, .keyPower2, .keySquareRoot:
                 return .special
+            case .keyMC, .keyMR, .keyMplus, .keyMminus, .keyMS, .keyMmenu:
+                return .memory
             default:
                 return .unknown
             }
@@ -128,7 +86,7 @@ class PopData {
             }
         }
         
-        var stringvalue: String {
+        var stringValue: String {
             switch self {
             case .key0:                      return "0"
             case .key1:                      return "1"
@@ -150,6 +108,12 @@ class PopData {
             case .keyResult:                 return "="
             case .keyInverse:                return "1/x"
             case .keyPower2:                 return "x^2"
+            case .keyMC:                     return "MC"
+            case .keyMR:                     return "MR"
+            case .keyMplus:                  return "M+"
+            case .keyMminus:                 return "M-"
+            case .keyMS:                     return "MS"
+            case .keyMmenu:                  return "Mv"
                 
             default:                         return ""
             }
@@ -175,35 +139,26 @@ class PopData {
         
     }
     
-//    struct PopKey {
-//        let symbol: PopKeySymbol
-//        let kind: PopKeyKind
-//        
-//        init(_ symbol: PopKeySymbol) {
-//            self.symbol = PopKeySymbol
-//        }
-//    }
-    
-//    static let popKeyGrid: [[PopKey]] = [
-//        [PopKey.key9],
-//    ]
+    // 6 x 1
+    static let popKeyGridMemory: [PopKey] = [ .keyMC, .keyMR, .keyMplus, .keyMminus, .keyMS, .keyMmenu ]
     
     // 3 x 6
     static let popKeyGridLeft: [[PopKey]] = [
-        [    PopKey.keyClear,              PopKey.keyClearEntry,       PopKey.keyDelete        ],
-        [    PopKey.keyInverse,            PopKey.keyPower2,           PopKey.keySquareRoot    ],
-        [    PopKey.key7,                  PopKey.key8,                PopKey.key9             ],
-        [    PopKey.key4,                  PopKey.key5,                PopKey.key6             ],
-        [    PopKey.key1,                  PopKey.key2,                PopKey.key3             ],
-        [    PopKey.keyPlusSlashMinus,     PopKey.key0,                PopKey.keyDot           ],
+        [   .keyClear,                .keyClearEntry,         .keyDelete        ],
+        [   .keyInverse,              .keyPower2,             .keySquareRoot    ],
+        [   .key7,                    .key8,                  .key9             ],
+        [   .key4,                    .key5,                  .key6             ],
+        [   .key1,                    .key2,                  .key3             ],
+        [   .keyPlusSlashMinus,       .key0,                  .keyDot           ],
     ]
     
+    // 1 x (4 + 1bigger)
     static let popKeyGridRight: [PopKey] = [
-        PopKey.keyDivide,
-        PopKey.keyMultiply,
-        PopKey.keyMinus,
-        PopKey.keyPlus,
-        PopKey.keyResult, // double size
+        .keyDivide,
+        .keyMultiply,
+        .keyMinus,
+        .keyPlus,
+        .keyResult, // double size
     ]
-    
+        
 }
