@@ -17,7 +17,6 @@ struct PopKeyButtonString: ButtonStyle {
         configuration.label
             .frame(width: finalSize.width, height: finalSize.height)
             .background(configuration.isPressed ? key.colorPressed : key.color)
-            .foregroundStyle(.white)
             .font(.system(size: 888))
             .minimumScaleFactor(0.01)
             .clipShape(
@@ -38,7 +37,6 @@ struct PopKeyButtonSFSymbol: ButtonStyle {
         configuration.label
             .frame(width: finalSize.width, height: finalSize.height)
             .background(configuration.isPressed ? key.colorPressed : key.color)
-            .foregroundStyle(.white)
             .clipShape(
                 RoundedRectangle(cornerRadius: finalSize.width / 30)
             )
@@ -59,14 +57,13 @@ struct PopMemoryKeyButton: ButtonStyle {
         configuration.label
             .frame(width: finalSize.width, height: finalSize.height)
             .background(configuration.isPressed ? key.colorPressed : key.color)
-            .foregroundStyle(.white)
             .font(.system(size: 888))
             .minimumScaleFactor(0.01)
             .clipShape(
-                RoundedRectangle(cornerRadius: finalSize.width / 30)
+                RoundedRectangle(cornerRadius: finalSize.width / 8)
             )
             .overlay(
-                RoundedRectangle(cornerRadius: finalSize.width / 30)
+                RoundedRectangle(cornerRadius: finalSize.width / 8)
                     .strokeBorder(key.colorPressed, lineWidth: finalSize.width / 40)
             )
     }

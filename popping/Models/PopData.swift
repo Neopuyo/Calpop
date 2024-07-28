@@ -9,6 +9,37 @@ import SwiftUI
 
 class PopData {
     
+    /// The part of the expression the user is currently typing
+    enum InputMode:String {
+        // First expression
+        case left
+        case mathOperator
+        case rightFirst
+        // Chaining expressions
+        case mathOperatorNext
+        case rightNext
+    }
+    
+    enum MathOperator: String {
+        case plus = "+"
+        case minus = "-"
+        case multiply = "x"
+        case divide = "/"
+        
+        static func getMathOperator(from sign: String) -> MathOperator? {
+            switch (sign) {
+            case "+":          return .plus
+            case "-":          return .minus
+            case "*", "x":     return .multiply
+            case "/":          return .divide
+            
+            default:
+                print("Error getMathOperator from '\(sign)' that returns nil") // [+] HANDLE ERROR BETTER
+                return nil
+            }
+        }
+    }
+    
     enum PopKeyKind: String {
         case digit
         case digitSpe

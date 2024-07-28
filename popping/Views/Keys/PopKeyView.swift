@@ -31,7 +31,7 @@ struct PopKeyView: View {
             )
         case .keyMemory:
             return CGSize(
-                width: size.width / 20 * 5,
+                width: size.width / 10,
                 height: size.height / 20
             )
         }
