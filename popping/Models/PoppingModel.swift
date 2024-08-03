@@ -67,6 +67,7 @@ class PoppingModel: ObservableObject {
             break
         case .mathOperatorNext:
             inputMode = .rightNext
+            tempResultLine = ""
         case .rightNext:
             break
         }
@@ -130,13 +131,18 @@ class PoppingModel: ObservableObject {
     private func specialPressed(_ key: PopData.PopKey) {
         switch key {
         case .keyClear:
+            // [C] clear all
             tempResultLine = ""
             tempExpressionLine = ""
+            leftOperand = nil
+            rightOperand = nil
+            mathOperator = nil
             inputMode = .left
             isError = false
             updateDisplayedResultLine()
             updateDisplayedExpressionLine()
         case .keyClearEntry:
+            // [C] clear Entry
             tempResultLine = ""
             updateDisplayedResultLine()
         case .keyDelete:
@@ -171,6 +177,7 @@ class PoppingModel: ObservableObject {
             mathOperator = nil
             inputMode = .mathOperatorNext
             updateDisplayedExpressionLine()
+            updateDisplayedResultLine()
         } catch {
             print("ERROR EVALUATING CURRENT")
             print(error.localizedDescription)
@@ -193,15 +200,22 @@ class PoppingModel: ObservableObject {
     private func updateDisplayedExpressionLine() {
         if inputMode == .mathOperator {
             displayedExpressionLine = "\(leftOperand ?? "??") \(mathOperator?.rawValue ?? "$$")"
+        } else if inputMode == .mathOperatorNext {
+            displayedExpressionLine = "(\(expressions.last!)) \(mathOperator?.rawValue ?? "")" // [+] need better save method improvement display
+        } else if tempExpressionLine.isEmpty {
+            displayedExpressionLine = ""
         }
-        
-//        else if inputMode == .mathOperatorNext {
-//            expressionLine = expressions.last! + " =" // [+] need better save method improvement display
-//        }
     }
     
     private func updateDisplayedResultLine() {
-
+        switch (inputMode) {
+        case .left, .mathOperatorNext:
+            displayedResultLine = tempResultLine
+        case .rightFirst, .rightNext:
+            displayedResultLine = tempResultLine
+        default:
+            break
+        }
     }
     
     

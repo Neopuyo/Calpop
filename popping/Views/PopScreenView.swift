@@ -33,7 +33,7 @@ struct PopScreenView: View {
                     .frame(maxWidth: .infinity, alignment: .trailing)
                 // --------------------------------------------------------------------------
                 
-                Text(displayedExpressionLine)
+                Text(popping.displayedExpressionLine)
                     .padding()
                     .lineLimit(1)
                     .frame(maxWidth: .infinity, alignment: .trailing)
@@ -42,7 +42,7 @@ struct PopScreenView: View {
                             .stroke(lineWidth:  2.5)
                             .foregroundColor(Color.mouikyColorAzurBlueDarker1)
                     )
-                Text(displayedResultLine)
+                Text(displayingResultLine())
                     .font(.title)
                     .padding()
                     .lineLimit(1)
@@ -58,20 +58,14 @@ struct PopScreenView: View {
     }
     
     // MARK: - Private methods
-    
-//    private func displayingResultLine() -> String {
-//        guard !popping.isError else { return "ERROR" }
-//        guard !(popping.resultLine.isEmpty && popping.inputMode == .left) else {
-//            print("Empty and LEFt Case") // [+] to del
-//            return "0"
-//        }
-//        guard !(popping.resultLine.isEmpty && (popping.inputMode == .rightFirst || popping.inputMode == .mathOperator)) else {
-//            print("Empty and Right Case") // [+] to del
-//            return popping.getLeftOperandResult
-//        }
-//        
-//        return popping.resultLine
-//    }
+    private func displayingResultLine() -> String {
+        guard !popping.isError else { return "ERROR" }
+        guard !popping.displayedResultLine.isEmpty else {
+            print("displayedResultLine is empty : display 0.0")
+            return "0.0"
+        }
+        return popping.displayedResultLine
+    }
     
     
     
