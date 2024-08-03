@@ -38,6 +38,19 @@ class PopData {
                 return nil
             }
         }
+        
+        var expSymbol: String {
+            switch (self) {
+                case .plus:     return "+"
+                case .minus:    return "-"
+                case .divide:   return "/"
+                case .multiply: return "*"
+            }
+        }
+        
+        var isPrioritary: Bool {
+            return self == .divide || self == .multiply
+        }
     }
     
     enum PopKeyKind: String {

@@ -28,7 +28,8 @@ class PoppingModel: ObservableObject {
 
     
 //    private var currentInput:String = ""
-    private var expressions: [String] = []
+//    private var expressions: [String] = []
+    private var popExpHandler: PopExpHandler = PopExpHandler()
     
 //    private var isChainingComputes: Bool = false => better inside inputMode steps
     
@@ -66,8 +67,19 @@ class PoppingModel: ObservableObject {
         case .rightFirst:
             break
         case .mathOperatorNext:
-            inputMode = .rightNext
-            tempResultLine = ""
+            if mathOperator == nil {
+                // start new compute from scratch
+                inputMode = .left
+//                expressions = []
+                popExpHandler.resetPopExps()
+                tempResultLine = ""
+                tempExpressionLine = ""
+                updateDisplayedExpressionLine()
+            } else {
+                // chain compute from previous result
+                inputMode = .rightNext
+                tempResultLine = ""
+            }
         case .rightNext:
             break
         }
@@ -146,6 +158,7 @@ class PoppingModel: ObservableObject {
             tempResultLine = ""
             updateDisplayedResultLine()
         case .keyDelete:
+            guard !(inputMode == .mathOperator || inputMode == .mathOperatorNext) else { return }
             guard !tempResultLine.isEmpty else { return }
             tempResultLine.remove(at: tempResultLine.index(before: tempResultLine.endIndex))
             updateDisplayedResultLine()
@@ -165,14 +178,15 @@ class PoppingModel: ObservableObject {
         // [N] : The three following force unwraps are guaranted by the guard statement above
         let formatedLeft: String = formatInputBeforeEvaluate(leftOperand!)
         let formatedRight: String = formatInputBeforeEvaluate(rightOperand!)
-        let expressionString: String = "\(formatedLeft) \(mathOperator!.rawValue) \(formatedRight)"
+        let expressionString: String = "\(formatedLeft) \(mathOperator!.expSymbol) \(formatedRight)"
         
         let expression : Expression = Expression(expressionString)
         do {
             let expressionResult: Double = try expression.evaluate()
-            expressions.append(expressionString)
+            let isFirst: Bool = popExpHandler.isFirst
+            try popExpHandler.addPopExp(leftOperand: isFirst ? leftOperand : nil, mathOperator: mathOperator!, rightOperand: rightOperand!)
             tempResultLine = String(expressionResult)
-            leftOperand! = String(expressionResult) // [+] need better save method improvement display
+            leftOperand! = String(expressionResult) // [+] need better save method improvement display // popExpHandler.popChain ???
             rightOperand = nil
             mathOperator = nil
             inputMode = .mathOperatorNext
@@ -199,9 +213,9 @@ class PoppingModel: ObservableObject {
     
     private func updateDisplayedExpressionLine() {
         if inputMode == .mathOperator {
-            displayedExpressionLine = "\(leftOperand ?? "??") \(mathOperator?.rawValue ?? "$$")"
+            displayedExpressionLine = "\(leftOperand ?? "??") \(mathOperator?.expSymbol ?? "$$")"
         } else if inputMode == .mathOperatorNext {
-            displayedExpressionLine = "(\(expressions.last!)) \(mathOperator?.rawValue ?? "")" // [+] need better save method improvement display
+            displayedExpressionLine = "\(popExpHandler.popChain) \(mathOperator?.expSymbol ?? "")" // [+] need better save method improvement display
         } else if tempExpressionLine.isEmpty {
             displayedExpressionLine = ""
         }
@@ -218,6 +232,14 @@ class PoppingModel: ObservableObject {
         }
     }
     
+//    private func makeCurrentChainExp() -> String {
+//        guard !expressions.isEmpty else { return "" }
+//        var chainExp: String = ""
+//        for exp in expressions {
+//            chainExp += "[\(exp)] "
+//        }
+//        return chainExp
+//    }
     
     private func formatInputBeforeEvaluate(_ input:String) -> String {
         let input = input.replacingOccurrences(of: "x", with: "*")
@@ -231,7 +253,7 @@ class PoppingModel: ObservableObject {
         print("MODE : \(inputMode.rawValue)")
         print("LeftOperand : \(leftOperand ?? "nil")")
         print("rightOperand : \(rightOperand ?? "nil")")
-        print("mathOperator : \(mathOperator?.rawValue ?? "nil")")
+        print("mathOperator : \(mathOperator?.expSymbol ?? "nil")")
         print("tempExpressionLine : '\(tempExpressionLine)'")
         print("tempResultLine : '\(tempResultLine)'")
         print("")
