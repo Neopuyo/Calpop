@@ -32,8 +32,8 @@ extension PopExpError: CustomStringConvertible {
 }
 
 protocol PopExpDelegate {
-    var popExps: [PopExp] { get set }
-    var popChain: String { get set }
+    var popExps: [PopExp] { get }
+    var popChain: String { get }
     
     func addPopExp(leftOperand: String?, mathOperator: PopData.MathOperator, rightOperand: String) throws
     func addPopExpToChain(_ exp: PopExp) throws

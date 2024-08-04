@@ -69,14 +69,15 @@ class PoppingModel: ObservableObject {
         case .mathOperatorNext:
             if mathOperator == nil {
                 // start new compute from scratch
+                print("start new compute from scratch")
                 inputMode = .left
-//                expressions = []
                 popExpHandler.resetPopExps()
                 tempResultLine = ""
                 tempExpressionLine = ""
                 updateDisplayedExpressionLine()
             } else {
                 // chain compute from previous result
+                print("chain compute from previous result")
                 inputMode = .rightNext
                 tempResultLine = ""
             }
@@ -129,8 +130,7 @@ class PoppingModel: ObservableObject {
         guard !tempResultLine.isEmpty else { setOrSwapOperator(with: mathKey); return }
         rightOperand = tempResultLine
         tempResultLine = ""
-        evaluateCurrentExpression()
-        
+        evaluateCurrentExpression(nextMathOperator: PopData.MathOperator.getMathOperator(from: mathKey.stringValue))
     }
         
     private func setOrSwapOperator(with mathKey: PopData.PopKey) {
@@ -151,6 +151,7 @@ class PoppingModel: ObservableObject {
             mathOperator = nil
             inputMode = .left
             isError = false
+            popExpHandler.resetPopExps()
             updateDisplayedResultLine()
             updateDisplayedExpressionLine()
         case .keyClearEntry:
@@ -169,7 +170,7 @@ class PoppingModel: ObservableObject {
     }
     
     /// Obj-C func can't be try catch easily
-    private func evaluateCurrentExpression() {
+    private func evaluateCurrentExpression(nextMathOperator:PopData.MathOperator? = nil) {
         guard isReadyToCompute else {
             print("Error evaluateCurrentExpression : !isReadyToCompute")
             isError = true
@@ -188,7 +189,7 @@ class PoppingModel: ObservableObject {
             tempResultLine = String(expressionResult)
             leftOperand! = String(expressionResult) // [+] need better save method improvement display // popExpHandler.popChain ???
             rightOperand = nil
-            mathOperator = nil
+            mathOperator = nextMathOperator
             inputMode = .mathOperatorNext
             updateDisplayedExpressionLine()
             updateDisplayedResultLine()
