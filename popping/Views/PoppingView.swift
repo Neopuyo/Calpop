@@ -15,30 +15,33 @@ struct PoppingView: View {
                 
                 // HEADER
                 Rectangle()
-                    .fill(Color.gray.opacity(0.5))
-                    .frame(height: geo.size.height * 0.08)
+                    .fill(Color.whiteToBlack)
+                    .frame(height: geo.size.height * 58 / 932)
                 
                 
                 // SCREEN
-                PopScreenView()
-                    .frame(height: geo.size.height * 0.45)
+                PopScreenView(ratio: geo.size.height / 932)
+                    .frame(height: geo.size.height * 286 / 932)
                 
                 // MID SEPARATOR
                 Rectangle()
-                    .fill(Color.gray.opacity(0.5))
-                    .frame(height: geo.size.height * 0.04)
+                    .fill(Color.whiteToBlack)
+                    .frame(height: geo.size.height * 38 / 932)
                 
                 
                 // PADS
                 PopPadView()
-                    .frame(height: geo.size.height * 0.45)
-                
+//                    .frame(height: geo.size.height * 0.45)
                 
                 
                 // FOOTER
+                Rectangle()
+                    .fill(Color.whiteToBlack)
+                    .frame(height: geo.size.height * 38 / 932)
                 
             }
             .ignoresSafeArea()
+            .padding(.horizontal, geo.size.height * 17 / 932 )
         }
     }
 }

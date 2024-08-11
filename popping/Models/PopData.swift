@@ -103,31 +103,43 @@ class PopData {
         var color: Color {
             switch self.kind {
             case .digit, .digitSpe:
-                return Color.mouikyColorTurquoiseBlue
+                return Color.whiteToBlack
             case .math:
-                return Color.mouikyColorBrightGreen
+                return Color.mathBlue
             case .special:
-                return Color.mouikyColorTangerine
+                return Color.specialBlue
             case .memory:
-                return Color.mouikyColorButterCup
+                if self == .keyMC || self == .keyMR { return Color.memoryButtonVariant }
+                return Color.memoryButton
             default:
-                return Color.mouikyColorTurquoiseBlue
+                return Color.whiteToBlack
             }
         }
         
         var colorPressed: Color {
             switch self.kind {
             case .digit, .digitSpe:
-                return Color.mouikyColorAzurBlueDarker1
+                return Color.whiteToBlackPressed
             case .math:
-                return Color.mouikyColorAzurBlueDarker1
+                return Color.mathBluePressed
             case .special:
-                return Color.mouikyColorAzurBlueDarker1
+                return Color.specialBluePressed
             case .memory:
-                return Color.mouikyColorAzurBlueDarker1
+                if self == .keyMC || self == .keyMR { return Color.memoryButtonVariantPressed }
+                return Color.memoryButtonPressed
             default:
-                return Color.mouikyColorAzurBlueDarker1
+                return Color.whiteToBlackPressed
             }
+        }
+        
+        var colorBorder: Color {
+            guard !(self.kind == .digit || self.kind == .digitSpe) else { return Color.mathBlue }
+            return self.color
+        }
+        
+        var colorForeground: Color {
+            guard !(self.kind == .digit || self.kind == .digitSpe) else { return Color.mathBlue }
+            return Color.whiteToBlack
         }
         
         var stringValue: String {

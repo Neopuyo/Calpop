@@ -11,8 +11,16 @@ import Expression
 
 class PoppingModel: ObservableObject {
     
+    static var previewSampleData: PoppingModel {
+        let sample = PoppingModel()
+        sample.displayedExpressionLine = "188 + 35"
+        sample.displayedResultLine = "223.0"
+        return sample
+    }
+    
     private var tempExpressionLine: String = ""
     @Published var displayedExpressionLine: String = ""
+    @Published var displayedNextMathOperator: PopData.MathOperator? = nil
     
     
     private var tempResultLine: String = ""
@@ -136,6 +144,7 @@ class PoppingModel: ObservableObject {
     private func setOrSwapOperator(with mathKey: PopData.PopKey) {
         guard let currentOperator = PopData.MathOperator.getMathOperator(from: mathKey.stringValue) else { isError = true; return }
         mathOperator = currentOperator
+        displayedNextMathOperator = currentOperator
         updateDisplayedExpressionLine()
     }
     
@@ -149,6 +158,7 @@ class PoppingModel: ObservableObject {
             leftOperand = nil
             rightOperand = nil
             mathOperator = nil
+            displayedNextMathOperator = nil
             inputMode = .left
             isError = false
             popExpHandler.resetPopExps()
@@ -190,6 +200,7 @@ class PoppingModel: ObservableObject {
             leftOperand! = String(expressionResult) // [+] need better save method improvement display // popExpHandler.popChain ???
             rightOperand = nil
             mathOperator = nextMathOperator
+            displayedNextMathOperator = nextMathOperator
             inputMode = .mathOperatorNext
             updateDisplayedExpressionLine()
             updateDisplayedResultLine()
@@ -214,9 +225,9 @@ class PoppingModel: ObservableObject {
     
     private func updateDisplayedExpressionLine() {
         if inputMode == .mathOperator {
-            displayedExpressionLine = "\(leftOperand ?? "??") \(mathOperator?.expSymbol ?? "$$")"
+            displayedExpressionLine = "\(leftOperand ?? "??")"
         } else if inputMode == .mathOperatorNext {
-            displayedExpressionLine = "\(popExpHandler.popChain) \(mathOperator?.expSymbol ?? "")" // [+] need better save method improvement display
+            displayedExpressionLine = "\(popExpHandler.popChain)" // [+] need better save method improvement display
         } else if tempExpressionLine.isEmpty {
             displayedExpressionLine = ""
         }

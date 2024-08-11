@@ -16,15 +16,16 @@ struct PopKeyButtonString: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(width: finalSize.width, height: finalSize.height)
+            .foregroundStyle(key.colorForeground)
             .background(configuration.isPressed ? key.colorPressed : key.color)
-            .font(.system(size: 888))
+            .font(.system(size: 888, design: .rounded))
             .minimumScaleFactor(0.01)
             .clipShape(
                 RoundedRectangle(cornerRadius: finalSize.width / 30)
             )
             .overlay(
                 RoundedRectangle(cornerRadius: finalSize.width / 30)
-                    .strokeBorder(key.colorPressed, lineWidth: finalSize.width / 40)
+                    .strokeBorder(key.colorBorder, lineWidth: finalSize.width / 80)
             )
     }
 }
@@ -36,13 +37,14 @@ struct PopKeyButtonSFSymbol: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(width: finalSize.width, height: finalSize.height)
+            .foregroundStyle(key.colorForeground)
             .background(configuration.isPressed ? key.colorPressed : key.color)
             .clipShape(
                 RoundedRectangle(cornerRadius: finalSize.width / 30)
             )
             .overlay(
                 RoundedRectangle(cornerRadius: finalSize.width / 30)
-                    .strokeBorder(key.colorPressed, lineWidth: finalSize.width / 40)
+                    .strokeBorder(key.colorBorder, lineWidth: finalSize.width / 80)
             )
     }
 }
@@ -56,15 +58,12 @@ struct PopMemoryKeyButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(width: finalSize.width, height: finalSize.height)
+            .foregroundStyle(key.colorForeground)
             .background(configuration.isPressed ? key.colorPressed : key.color)
-            .font(.system(size: 888))
+            .font(.system(size: 888, design: .rounded))
             .minimumScaleFactor(0.01)
             .clipShape(
-                RoundedRectangle(cornerRadius: finalSize.width / 8)
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: finalSize.width / 8)
-                    .strokeBorder(key.colorPressed, lineWidth: finalSize.width / 40)
+                Capsule()
             )
     }
 }

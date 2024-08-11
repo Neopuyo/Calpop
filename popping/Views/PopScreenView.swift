@@ -11,11 +11,19 @@ struct PopScreenView: View {
     
     @EnvironmentObject var popping: PoppingModel
     
+    let ratio: CGFloat
+    
     var body: some View {
         ZStack {
             
-            Rectangle()
-                .fill(Color.mouikyColorAzurBlue)
+            RoundedRectangle(cornerRadius: 8.0)
+                .fill(
+                    LinearGradient(colors: [Color.screenGradientStart, Color.screenGradientEnd], 
+                                   startPoint: UnitPoint(x: 1.0, y: 0.0),
+                                   endPoint: UnitPoint(x: 0.0, y: 1.0)
+                                  )
+                    )
+                    
         
             VStack(spacing:0) {
                 Spacer()
@@ -33,29 +41,40 @@ struct PopScreenView: View {
                     .frame(maxWidth: .infinity, alignment: .trailing)
                 // --------------------------------------------------------------------------
                 
-                Text(popping.displayedExpressionLine)
-                    .padding()
+                HStack {
+                    Text(popping.displayedExpressionLine)
+                        .padding()
+                        .font(.system(size: 25 * ratio , design: .rounded))
+                        .foregroundStyle(Color.white)
+                    Text(displayingNextMathOperator())
+                        .font(.system(size: 25 * ratio , design: .rounded))
+                        .foregroundStyle(Color.memoryButton)
+                        .padding()
+                }
                     .lineLimit(1)
                     .frame(maxWidth: .infinity, alignment: .trailing)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 22.0)
-                            .stroke(lineWidth:  2.5)
-                            .foregroundColor(Color.mouikyColorAzurBlueDarker1)
-                    )
+//                    .overlay(
+//                        RoundedRectangle(cornerRadius: 22.0)
+//                            .stroke(lineWidth:  2.5)
+//                            .foregroundColor(Color.mouikyColorAzurBlueDarker1)
+//                    )
+               
                 Text(displayingResultLine())
-                    .font(.title)
+                    .font(.system(size: 90 * ratio , design: .default))
                     .padding()
                     .lineLimit(1)
                     .frame(maxWidth: .infinity, alignment: .trailing)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 22.0)
-                            .stroke(lineWidth:  2.5)
-                            .foregroundColor(Color.mouikyColorAzurBlueDarker1)
-                    )
+                    .foregroundStyle(Color.white)
+//                    .overlay(
+//                        RoundedRectangle(cornerRadius: 22.0)
+//                            .stroke(lineWidth:  2.5)
+//                            .foregroundColor(Color.mouikyColorAzurBlueDarker1)
+//                        )
                 Spacer()
             }
         }
     }
+
     
     // MARK: - Private methods
     private func displayingResultLine() -> String {
@@ -67,11 +86,18 @@ struct PopScreenView: View {
         return popping.displayedResultLine
     }
     
+    private func displayingNextMathOperator() -> String {
+        guard !popping.isError else { return "" }
+        guard let nextMathOp = popping.displayedNextMathOperator else { return "" }
+        return nextMathOp.expSymbol
+    }
+    
     
     
 }
 
-#Preview {
-    PopScreenView()
-        .environmentObject(PoppingModel())
+@available(iOS 17, *)
+#Preview(traits: .fixedLayout(width: 396, height: 286)) {
+    PopScreenView(ratio: 1.0)
+        .environmentObject(PoppingModel.previewSampleData)
 }

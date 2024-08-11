@@ -14,7 +14,7 @@ struct PopPadView: View {
             VStack(spacing:0) {
                 
                 PopPadMemoryView()
-                    .frame(height: geo.size.height * 0.15)
+                    .frame(height: geo.size.height * 50 / 518.5)
                 
                 HStack(spacing:0) {
                     PopPadLeftView()
@@ -30,7 +30,7 @@ struct PopPadView: View {
 }
 
 @available(iOS 17, *)
-#Preview(traits: .fixedLayout(width: 300, height: 500)) {
+#Preview(traits: .fixedLayout(width: 396, height: 550)) {
     PopPadView()
         .environmentObject(PoppingModel())
 }
