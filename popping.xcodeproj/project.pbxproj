@@ -15,6 +15,7 @@
 		1D560C112C4C09B500201C4F /* PopPadRightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D560C102C4C09B500201C4F /* PopPadRightView.swift */; };
 		1D728F762C4BC5EE002A5A93 /* PopPadLeftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D728F752C4BC5EE002A5A93 /* PopPadLeftView.swift */; };
 		1D9126502C4CFC900087EAC2 /* PopPadMemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D91264F2C4CFC900087EAC2 /* PopPadMemoryView.swift */; };
+		1DBA1CE92C6B7F7000DB4190 /* PopMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DBA1CE82C6B7F7000DB4190 /* PopMemory.swift */; };
 		1DC147B52C42650E004B983D /* PoppingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC147B42C42650E004B983D /* PoppingView.swift */; };
 		1DC147B82C426633004B983D /* PoppingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC147B72C426633004B983D /* PoppingModel.swift */; };
 		1DC147BA2C426940004B983D /* PopData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC147B92C426940004B983D /* PopData.swift */; };
@@ -36,6 +37,7 @@
 		1D560C102C4C09B500201C4F /* PopPadRightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopPadRightView.swift; sourceTree = "<group>"; };
 		1D728F752C4BC5EE002A5A93 /* PopPadLeftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopPadLeftView.swift; sourceTree = "<group>"; };
 		1D91264F2C4CFC900087EAC2 /* PopPadMemoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopPadMemoryView.swift; sourceTree = "<group>"; };
+		1DBA1CE82C6B7F7000DB4190 /* PopMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopMemory.swift; sourceTree = "<group>"; };
 		1DC147B42C42650E004B983D /* PoppingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoppingView.swift; sourceTree = "<group>"; };
 		1DC147B72C426633004B983D /* PoppingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoppingModel.swift; sourceTree = "<group>"; };
 		1DC147B92C426940004B983D /* PopData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopData.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				1DC147B72C426633004B983D /* PoppingModel.swift */,
 				1DC147B92C426940004B983D /* PopData.swift */,
 				1D33478E2C5E33940094806E /* PopExp.swift */,
+				1DBA1CE82C6B7F7000DB4190 /* PopMemory.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 			files = (
 				1DC147BC2C428035004B983D /* PopScreenView.swift in Sources */,
 				1D9126502C4CFC900087EAC2 /* PopPadMemoryView.swift in Sources */,
+				1DBA1CE92C6B7F7000DB4190 /* PopMemory.swift in Sources */,
 				1D728F762C4BC5EE002A5A93 /* PopPadLeftView.swift in Sources */,
 				1D33478F2C5E33940094806E /* PopExp.swift in Sources */,
 				1DE4DB8C2C4D0AF700B2CC44 /* KeySFView.swift in Sources */,

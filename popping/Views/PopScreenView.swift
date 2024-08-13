@@ -32,32 +32,29 @@ struct PopScreenView: View {
                 Button("Check Values", systemImage: "arrow.up") {
                     popping.checkValues()
                 }
-                .foregroundStyle(.mouikyColorAzurBlueDarker1)
+                .foregroundStyle(.specialBlue)
                 .font(.caption2)
                 .frame(maxWidth: .infinity, alignment: .trailing)
+                .padding(.trailing)
                 
                 Text(popping.inputMode.rawValue)
+                    .foregroundStyle(.specialBlue)
                     .font(.caption2)
                     .frame(maxWidth: .infinity, alignment: .trailing)
-                // --------------------------------------------------------------------------
+                    .padding(.trailing)
+                // ------------------------------------------------------------
                 
-                HStack {
-                    Text(popping.displayedExpressionLine)
-                        .padding()
-                        .font(.system(size: 25 * ratio , design: .rounded))
-                        .foregroundStyle(Color.white)
-                    Text(displayingNextMathOperator())
-                        .font(.system(size: 25 * ratio , design: .rounded))
-                        .foregroundStyle(Color.memoryButton)
-                        .padding()
-                }
+                // Put a " " instead of empty string to fix height
+                Text(
+                    popping.displayedExpressionLine == "" ? " " : popping.displayedExpressionLine
+                    )
+                    .padding()
+                    .font(.system(size: 25 * ratio , design: .rounded))
+                    .foregroundStyle(Color.white)
                     .lineLimit(1)
+                    .allowsTightening(false)
                     .frame(maxWidth: .infinity, alignment: .trailing)
-//                    .overlay(
-//                        RoundedRectangle(cornerRadius: 22.0)
-//                            .stroke(lineWidth:  2.5)
-//                            .foregroundColor(Color.mouikyColorAzurBlueDarker1)
-//                    )
+
                
                 Text(displayingResultLine())
                     .font(.system(size: 90 * ratio , design: .default))
@@ -65,11 +62,7 @@ struct PopScreenView: View {
                     .lineLimit(1)
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .foregroundStyle(Color.white)
-//                    .overlay(
-//                        RoundedRectangle(cornerRadius: 22.0)
-//                            .stroke(lineWidth:  2.5)
-//                            .foregroundColor(Color.mouikyColorAzurBlueDarker1)
-//                        )
+
                 Spacer()
             }
         }

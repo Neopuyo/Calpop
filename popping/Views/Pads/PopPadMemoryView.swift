@@ -13,20 +13,22 @@ struct PopPadMemoryView: View {
     
     var body: some View {
         GeometryReader { geo in
-            HStack(spacing:0) {
+            HStack(alignment: .top, spacing:0) {
+                Spacer()
                 ForEach(0..<6) { i in
                     PopKeyView(
                         keyStyle: .keyMemory,
                         key: keyGrid[i],
                         size: CGSize(
-                            width: (geo.size.width - ((27 * 2) * geo.size.width / 396 )) * 1 / 6,
-                            height: geo.size.height * 25 / 50
+                            width: (geo.size.width - ((22 * 2) * geo.size.width / 396 )) * 1 / 6,
+                            height: geo.size.height
                         ),
                         action: popping.keyPressed
                     )
                 }
+                Spacer()
             }
-            .padding(.horizontal, geo.size.width * 27 / 396)
+//            .padding(.horizontal, geo.size.width * 27 / 396)
         }
     }
 }

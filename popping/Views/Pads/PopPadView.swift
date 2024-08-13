@@ -14,9 +14,14 @@ struct PopPadView: View {
             VStack(spacing:0) {
                 
                 PopPadMemoryView()
-                    .frame(height: geo.size.height * 50 / 518.5)
+                    .frame(height: geo.size.height * 25 / 507)
                 
-                HStack(spacing:0) {
+                // Memory to Special Spacer
+                Rectangle()
+                    .fill(Color.whiteToBlack)
+                    .frame(height: geo.size.height * 20 / 507)
+                
+                HStack(alignment: .top, spacing:0) {
                     PopPadLeftView()
                         .frame(width: (geo.size.width * 3/4))
                     

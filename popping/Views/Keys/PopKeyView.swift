@@ -31,9 +31,14 @@ struct PopKeyView: View {
             )
         case .keyMemory:
             return CGSize(
-                width: size.width / 10,
-                height: size.height / 20
+//                width: 0.0,
+                width: 7 * (size.width / (47 + 14)) , // memo button iPhone15pro : pad7 + width47 + pad7
+                height: 0.0 // [!] TODO : CHECK HERE memo button shape / paddings
             )
+//            return CGSize(
+//                width: size.width / 10,
+//                height: size.height / 20
+//            )
         }
     }
     
@@ -63,4 +68,5 @@ struct PopKeyView: View {
     PopKeyView(keyStyle: .keyString, key: PopData.PopKey.keyPlus, size: CGSize(width: 100, height: 50)) { _ in
         print("key pressed")
     }
+    .environmentObject(PoppingModel())
 }

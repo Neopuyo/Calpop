@@ -22,7 +22,6 @@ class PoppingModel: ObservableObject {
     @Published var displayedExpressionLine: String = ""
     @Published var displayedNextMathOperator: PopData.MathOperator? = nil
     
-    
     private var tempResultLine: String = ""
     @Published var displayedResultLine: String = ""
     
@@ -38,6 +37,9 @@ class PoppingModel: ObservableObject {
 //    private var currentInput:String = ""
 //    private var expressions: [String] = []
     private var popExpHandler: PopExpHandler = PopExpHandler()
+    
+    @Published var isMemory: Bool = false
+    private var popMemoryHandler: PopMemoryHandler = PopMemoryHandler()
     
 //    private var isChainingComputes: Bool = false => better inside inputMode steps
     

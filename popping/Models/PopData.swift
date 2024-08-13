@@ -109,7 +109,6 @@ class PopData {
             case .special:
                 return Color.specialBlue
             case .memory:
-                if self == .keyMC || self == .keyMR { return Color.memoryButtonVariant }
                 return Color.memoryButton
             default:
                 return Color.whiteToBlack
@@ -125,7 +124,6 @@ class PopData {
             case .special:
                 return Color.specialBluePressed
             case .memory:
-                if self == .keyMC || self == .keyMR { return Color.memoryButtonVariantPressed }
                 return Color.memoryButtonPressed
             default:
                 return Color.whiteToBlackPressed
@@ -133,8 +131,14 @@ class PopData {
         }
         
         var colorBorder: Color {
-            guard !(self.kind == .digit || self.kind == .digitSpe) else { return Color.mathBlue }
-            return self.color
+            switch (self.kind) {
+            case .digit, .digitSpe, .special:
+                return Color.mathBlue
+            case .memory:
+                return Color.memoryButtonPressed
+            default:
+                return self.color
+            }
         }
         
         var colorForeground: Color {
@@ -166,8 +170,8 @@ class PopData {
             case .keyPower2:                 return "x^2"
             case .keyMC:                     return "MC"
             case .keyMR:                     return "MR"
-            case .keyMplus:                  return "M+"
-            case .keyMminus:                 return "M-"
+            case .keyMplus:                  return "M +"
+            case .keyMminus:                 return "M -"
             case .keyMS:                     return "MS"
             case .keyMmenu:                  return "Mv"
                 
