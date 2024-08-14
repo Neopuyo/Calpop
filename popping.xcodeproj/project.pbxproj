@@ -26,6 +26,7 @@
 		1DE4DB8A2C4D096A00B2CC44 /* KeyStringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE4DB892C4D096A00B2CC44 /* KeyStringView.swift */; };
 		1DE4DB8C2C4D0AF700B2CC44 /* KeySFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE4DB8B2C4D0AF700B2CC44 /* KeySFView.swift */; };
 		1DE4DB8E2C4D0BED00B2CC44 /* KeyMemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE4DB8D2C4D0BED00B2CC44 /* KeyMemoryView.swift */; };
+		1DFBFFC72C6CA1980010B53B /* PopComputer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFBFFC62C6CA1980010B53B /* PopComputer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		1DE4DB892C4D096A00B2CC44 /* KeyStringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStringView.swift; sourceTree = "<group>"; };
 		1DE4DB8B2C4D0AF700B2CC44 /* KeySFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeySFView.swift; sourceTree = "<group>"; };
 		1DE4DB8D2C4D0BED00B2CC44 /* KeyMemoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyMemoryView.swift; sourceTree = "<group>"; };
+		1DFBFFC62C6CA1980010B53B /* PopComputer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopComputer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				1DC147B72C426633004B983D /* PoppingModel.swift */,
+				1DFBFFC62C6CA1980010B53B /* PopComputer.swift */,
 				1DC147B92C426940004B983D /* PopData.swift */,
 				1D33478E2C5E33940094806E /* PopExp.swift */,
 				1DBA1CE82C6B7F7000DB4190 /* PopMemory.swift */,
@@ -250,6 +253,7 @@
 				1DC147C02C42879F004B983D /* PopKeyView.swift in Sources */,
 				1DC147B52C42650E004B983D /* PoppingView.swift in Sources */,
 				1DE4DB852C4D03BA00B2CC44 /* PopKeyButtonStyles.swift in Sources */,
+				1DFBFFC72C6CA1980010B53B /* PopComputer.swift in Sources */,
 				1DC147BA2C426940004B983D /* PopData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

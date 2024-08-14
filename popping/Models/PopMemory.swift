@@ -29,6 +29,10 @@ protocol PopMemoryDelegate {
 
 class PopMemoryHandler : PopMemoryDelegate {
     
+    func memoryKeyPressed(_ key: PopData.PopKey) {
+        print("Memory key [\(key.rawValue)] not handled yet 🦔")
+    }
+    
     func isMemoryEmpty() -> Bool {
         return true
     }

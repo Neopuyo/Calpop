@@ -10,7 +10,7 @@ import SwiftUI
 class PopData {
     
     /// The part of the expression the user is currently typing
-    enum InputMode:String {
+    enum InputMode: String {
         // First expression
         case left
         case mathOperator

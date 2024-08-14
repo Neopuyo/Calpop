@@ -37,7 +37,7 @@ struct PopScreenView: View {
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .padding(.trailing)
                 
-                Text(popping.inputMode.rawValue)
+                Text(popping.displayedInputMode.rawValue)
                     .foregroundStyle(.specialBlue)
                     .font(.caption2)
                     .frame(maxWidth: .infinity, alignment: .trailing)
@@ -71,7 +71,7 @@ struct PopScreenView: View {
     
     // MARK: - Private methods
     private func displayingResultLine() -> String {
-        guard !popping.isError else { return "ERROR" }
+//        guard !popping.isError else { return "ERROR" }
         guard !popping.displayedResultLine.isEmpty else {
             print("displayedResultLine is empty : display 0.0")
             return "0.0"
@@ -80,7 +80,7 @@ struct PopScreenView: View {
     }
     
     private func displayingNextMathOperator() -> String {
-        guard !popping.isError else { return "" }
+//        guard !popping.isError else { return "" }
         guard let nextMathOp = popping.displayedNextMathOperator else { return "" }
         return nextMathOp.expSymbol
     }
