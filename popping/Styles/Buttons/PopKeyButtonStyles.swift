@@ -50,13 +50,10 @@ struct PopKeyButtonSFSymbol: ButtonStyle {
     let finalSize: CGSize
     let key: PopData.PopKey
     
-    @EnvironmentObject() var popping: PoppingModel
-    
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .frame(width: finalSize.width * 2 / 3, height: isResultCase ? finalSize.height * 1 / 2 : finalSize.height)
+            .frame(width: finalSize.width * 2 / 3, height: finalSize.height)
             .padding(.horizontal, finalSize.width * 1 / 6)
-            .padding(.top, isResultCase ? finalSize.height * 1 / 2 : 0)
             .foregroundStyle(key.colorForeground)
             .background(configuration.isPressed ? key.colorPressed : key.color)
             .clipShape(
@@ -65,14 +62,48 @@ struct PopKeyButtonSFSymbol: ButtonStyle {
             .overlay(
                 RoundedRectangle(cornerRadius: finalSize.width / 15)
                     .strokeBorder(
-                        isMathOperatorSelected ? Color.memoryButton : key.colorBorder,
-                        lineWidth: isMathOperatorSelected ? finalSize.width / 20 : finalSize.width / 80
+                        key.colorBorder,
+                        lineWidth: finalSize.width / 80
                     )
             )
+        
     }
+}
+
+struct PopKeyMathButton: ButtonStyle {
+    let finalSize: CGSize
+    let key: PopData.PopKey
     
-    private func makeBodyForResultKey(configuration: Configuration) -> some View {
-        return EmptyView()
+    @EnvironmentObject() var popping: PoppingModel
+    
+    
+    func makeBody(configuration: Configuration) -> some View {
+        let pressed: Bool = (isMathOperatorSelected || configuration.isPressed)
+//        let pressed: Bool = (true)
+        
+        return configuration.label
+            .frame(width: finalSize.width * 2 / 3, height: isResultCase ? finalSize.height * 1 / 2 : finalSize.height)
+            .padding(.horizontal, finalSize.width * 1 / 6)
+            .padding(.top, isResultCase ? finalSize.height * 1 / 2 : 0)
+            .foregroundStyle(key.colorForeground)
+            .background(pressed ? key.colorPressed : key.color)
+            .clipShape(
+                RoundedRectangle(cornerRadius: finalSize.width / 15)
+            )
+            .overlay(
+                ZStack {
+                    RoundedRectangle(cornerRadius: finalSize.width / 15)
+                        .strokeBorder(
+                            pressed ? Color.whiteToBlack : key.colorBorder,
+                            lineWidth: finalSize.width / 80 * 4
+                        )
+                    RoundedRectangle(cornerRadius: finalSize.width / 15)
+                        .strokeBorder(
+                            pressed ? Color.mathBlueAddedBorder : Color.mathBlue,
+                            lineWidth: finalSize.width / 80 * 3
+                        )
+                }
+            )
     }
     
     private var isResultCase: Bool {
@@ -85,6 +116,8 @@ struct PopKeyButtonSFSymbol: ButtonStyle {
         
         return key.stringValue == mathOperator.rawValue
     }
+    
+    
 }
 
 

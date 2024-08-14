@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum KeyStyle {
-    case keyString, keySF, keyMemory, keyResult
+    case keyString, keySF, keyMath, keyMemory, keyResult
 }
 
 struct PopKeyView: View {
@@ -19,7 +19,7 @@ struct PopKeyView: View {
     
     private var paddingSize:CGSize {
         switch keyStyle {
-        case .keyString, .keySF:
+        case .keyString, .keySF, .keyMath:
             return CGSize(
                 width: size.width / 20,
                 height: size.height / 20
@@ -54,8 +54,11 @@ struct PopKeyView: View {
         case .keyString:
             KeyStringView(key: key, finalSize: finalSize, paddingSize: paddingSize, action: action)
             
-        case .keySF, .keyResult:
+        case .keySF:
             KeySFView(key: key, finalSize: finalSize, paddingSize: paddingSize, action: action)
+            
+        case .keyMath, .keyResult:
+            KeyMathView(key: key, finalSize: finalSize, paddingSize: paddingSize, action: action)
             
         case .keyMemory:
             KeyMemoryView(key: key, finalSize: finalSize, paddingSize: paddingSize, action: action)
