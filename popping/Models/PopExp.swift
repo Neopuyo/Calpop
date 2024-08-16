@@ -73,7 +73,7 @@ extension PopExpError: CustomStringConvertible {
 
 protocol PopExpDelegate {
     var popExps: [PopExp] { get }
-    var popChain: String { get }
+//    var popChain: String { get }
     
 //    func addPopExp(leftOperand: String?, mathOperator: PopData.MathOperator, rightOperand: String) throws
 //    func addPopExpToChain(_ exp: PopExp) throws
@@ -84,9 +84,10 @@ protocol PopExpDelegate {
 
 class PopExpHandler : PopExpDelegate {
     var popExps: [PopExp]
-    var popChain: String
+    private var popChain: String
     
-    private var countNormalExp:Int = 0
+    private var countNormalExp: Int = 0
+    private var isNegTerminated: Bool = false
        
     private var getUniqNormal : PopExp? {
         guard countNormalExp == 1 else { return nil }
@@ -99,6 +100,10 @@ class PopExpHandler : PopExpDelegate {
     }
     
     var hasNoNormalExp : Bool { countNormalExp == 0 }
+    
+    func prepareChain() -> String {
+        isNegTerminated ? "(\(popChain)) * -1" : popChain
+    }
     
 //    var refreshedPopChain: String? {
 //        get {
@@ -115,8 +120,7 @@ class PopExpHandler : PopExpDelegate {
         case .normal(let normalPopExp):
             try addNormalPopExp(leftOperand: normalPopExp.leftOperand, mathOperator: normalPopExp.mathOperator, rightOperand: normalPopExp.rightOperand)
         case .negate:
-            return
-//            addNegatePopExp()
+            addNegatePopExp()
         }
     }
     
@@ -124,23 +128,20 @@ class PopExpHandler : PopExpDelegate {
         popExps = []
         popChain = ""
         countNormalExp = 0
+        isNegTerminated = false
     }
     
     
-//    private func addNegatePopExp() {
-//        guard !popExps.isEmpty else { return }
-//        if let lastExp = popExps.last {
-//            if lastExp == .negate {
-//                popExps.removeLast()
-//                isNegTerminated = false
-//            } else {
-//                popExps.append(PopExp.negate)
-//                isNegTerminated = true
-//            }
-//        } else {
-//            print("addNegatePopExp popExps.last returned nil -> Unexpected ")
-//        }
-//    }
+    private func addNegatePopExp() {
+        guard !popExps.isEmpty else { return }
+        if isNegTerminated {
+            popExps.removeLast()
+            isNegTerminated = false
+        } else {
+            popExps.append(PopExp.negate)
+            isNegTerminated = true
+        }
+    }
     
     private func addNormalPopExp(leftOperand: String? = nil, mathOperator: PopData.MathOperator, rightOperand: String) throws {
         guard !(countNormalExp == 0 && leftOperand == nil) else { throw PopExpError.leftOperandRequired }
@@ -149,6 +150,7 @@ class PopExpHandler : PopExpDelegate {
         let newPopExp = PopExp.normal(normalExp)
         popExps.append(newPopExp)
         countNormalExp += 1
+        isNegTerminated = false
         try addNormalPopExpToChain(normalExp)
     }
     

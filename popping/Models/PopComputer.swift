@@ -57,7 +57,7 @@ class PopComputer : PopComputerDelegate {
         if inputMode == .mathOperator {
             return "\(leftOperand ?? "??")"
         } else if inputMode == .mathOperatorNext {
-            return "\(popExpHandler.popChain)" // [+] need better save method improvement display
+            return "\(popExpHandler.prepareChain())" // [+] need better save method improvement display
         } else {
             return ""
         }
@@ -145,8 +145,11 @@ class PopComputer : PopComputerDelegate {
         case .left, .rightFirst, .rightNext:
             resultLineToggledByNegate()
             
-        case .mathOperator, .mathOperatorNext:
+        case .mathOperator:
             return
+            
+        case .mathOperatorNext:
+            mathOperatorNextToggledByNegate()
         }
     }
     
@@ -199,6 +202,19 @@ class PopComputer : PopComputerDelegate {
             }
             displayResultLine()
         }
+    }
+    
+    // [!] access to popExpHandler.isNegTerminated will produce data races !
+    private func mathOperatorNextToggledByNegate() {
+        let memoNegative:Bool = tempResultLine.first == "-"
+        try! popExpHandler.addPopExp(PopExp.negate)
+        
+        if memoNegative {
+            tempResultLine = String(tempResultLine.dropFirst())
+        } else {
+            tempResultLine = "-\(tempResultLine)"
+        }
+        displayResultLine()
     }
     
     private func rightSideFinished(with mathKey: PopData.PopKey) {
@@ -269,7 +285,10 @@ class PopComputer : PopComputerDelegate {
             let normalExp = NormalPopExp(leftOperand: isFirst ? leftOperand : nil, mathOperator: mathOperator!, rightOperand: rightOperand!)
             try popExpHandler.addPopExp(PopExp.normal(normalExp))
             tempResultLine = String(expressionResult)
+            
+            // CONTINUE HERE WIP
             leftOperand! = String(expressionResult) // [+] need better save method improvement display // popExpHandler.popChain ???
+//            leftOperand! = popExpHandler.prepareChain()
             rightOperand = nil
             mathOperator = nextOP
             nextMathOperator = nextOP
