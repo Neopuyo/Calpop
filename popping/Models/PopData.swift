@@ -173,7 +173,7 @@ class PopData {
             case .keyMplus:                  return "M +"
             case .keyMminus:                 return "M -"
             case .keyMS:                     return "MS"
-            case .keyMmenu:                  return "Mv"
+            case .keyMmenu:                  return "M􀆈"
                 
             default:                         return ""
             }

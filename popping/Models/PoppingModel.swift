@@ -47,6 +47,7 @@ class PoppingModel: ObservableObject {
     private func displayInputMode() {
         displayedInputMode = popComputer.refreshedInputMode
     }
+    
 
     // MARK: ON INIT
     private func bindComputerDisplayCallbacks(computer: PopComputer) {
@@ -54,6 +55,8 @@ class PoppingModel: ObservableObject {
         computer.displayResultLine = displayResultLine
         computer.displayNextMathOperator = displayNextMathOperator
         computer.displayInputMode = displayInputMode
+//        computer.displayToggleSign = displayToggleSign
+        
     }
     
     // MARK: SAMPLE DATA

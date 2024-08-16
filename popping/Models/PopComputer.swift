@@ -15,6 +15,7 @@ protocol PopComputerDelegate {
     var displayResultLine: () -> () { get }
     var displayNextMathOperator: () -> () { get }
     var displayInputMode: () -> () { get }
+//    var displayToggleSign: () -> () { get }
     
     var refreshedExpressionLine: String { get }
     var refreshedResultLine: String? { get }
@@ -44,7 +45,6 @@ class PopComputer : PopComputerDelegate {
     private var mathOperator:PopData.MathOperator? = nil
     private var nextMathOperator:PopData.MathOperator? = nil
     
-    
     var displayExpLine: () -> () = {}
     var displayResultLine: () -> () = {}
     var displayNextMathOperator: () -> () = {}
@@ -66,12 +66,11 @@ class PopComputer : PopComputerDelegate {
     var refreshedResultLine: String? {
         guard !isError else { return "ERROR" }
         switch (inputMode) {
-        case .left, .mathOperatorNext:
+        // [+] clean this
+        case .left, .mathOperator, .mathOperatorNext, .rightFirst, .rightNext:
             return tempResultLine
-        case .rightFirst, .rightNext:
-            return tempResultLine
-        default:
-            return nil
+//        default:
+//            return nil
         }
     }
     
@@ -83,6 +82,7 @@ class PopComputer : PopComputerDelegate {
     var refreshedInputMode: PopData.InputMode {
         return inputMode
     }
+    
 
     func keyPressed(_ key: PopData.PopKey) {
         switch key.kind {
@@ -138,8 +138,16 @@ class PopComputer : PopComputerDelegate {
         displayResultLine()
     }
     
+    // No throw possible with negate case
     private func plusSlashMinusPressed() {
-        // WIP
+        switch inputMode {
+            
+        case .left, .rightFirst, .rightNext:
+            resultLineToggledByNegate()
+            
+        case .mathOperator, .mathOperatorNext:
+            return
+        }
     }
     
     private func mathPressed(_ mathKey: PopData.PopKey) {
@@ -180,6 +188,19 @@ class PopComputer : PopComputerDelegate {
         // update ResltLine too ?
     }
     
+    private func resultLineToggledByNegate() {
+        if tempResultLine.isEmpty {
+            return
+        } else {
+            if tempResultLine.first == "-" {
+                tempResultLine = String(tempResultLine.dropFirst())
+            } else {
+                tempResultLine = "-\(tempResultLine)"
+            }
+            displayResultLine()
+        }
+    }
+    
     private func rightSideFinished(with mathKey: PopData.PopKey) {
         guard !tempResultLine.isEmpty else { setOrSwapOperator(with: mathKey); return }
         rightOperand = tempResultLine
@@ -218,10 +239,14 @@ class PopComputer : PopComputerDelegate {
             guard !(inputMode == .mathOperator || inputMode == .mathOperatorNext) else { return }
             guard !tempResultLine.isEmpty else { return }
             tempResultLine.remove(at: tempResultLine.index(before: tempResultLine.endIndex))
+              // Memo : fix deleted when only "-" from +/- special digit
+            if tempResultLine.first == "-" && tempResultLine.count == 1 {
+                tempResultLine = ""
+            }
             displayResultLine()
             
         default:
-            print("CONTINUE IMPLEMENTING THIS")
+            print("🪽 CONTINUE IMPLEMENTING THIS")
         }
     }
     
@@ -240,8 +265,9 @@ class PopComputer : PopComputerDelegate {
         let expression : Expression = Expression(expressionString)
         do {
             let expressionResult: Double = try expression.evaluate()
-            let isFirst: Bool = popExpHandler.isFirst
-            try popExpHandler.addPopExp(leftOperand: isFirst ? leftOperand : nil, mathOperator: mathOperator!, rightOperand: rightOperand!)
+            let isFirst: Bool = popExpHandler.hasNoNormalExp
+            let normalExp = NormalPopExp(leftOperand: isFirst ? leftOperand : nil, mathOperator: mathOperator!, rightOperand: rightOperand!)
+            try popExpHandler.addPopExp(PopExp.normal(normalExp))
             tempResultLine = String(expressionResult)
             leftOperand! = String(expressionResult) // [+] need better save method improvement display // popExpHandler.popChain ???
             rightOperand = nil
@@ -256,17 +282,18 @@ class PopComputer : PopComputerDelegate {
         }
     }
     
-    private func evaluateExpression(from exp: String) -> String? {
-        let expression : Expression = Expression(exp)
-        do {
-            let expressionResult: Double = try expression.evaluate()
-            return String(expressionResult)
-        } catch {
-            print("ERROR EVALUATING '\(exp)'")
-            print(error.localizedDescription)
-            return nil
-        }
-    }
+    // [?] not used anymore ? later maybe ?
+//    private func evaluateExpression(from exp: String) -> String? {
+//        let expression : Expression = Expression(exp)
+//        do {
+//            let expressionResult: Double = try expression.evaluate()
+//            return String(expressionResult)
+//        } catch {
+//            print("ERROR EVALUATING '\(exp)'")
+//            print(error.localizedDescription)
+//            return nil
+//        }
+//    }
     
     private func formatInputBeforeEvaluate(_ input:String) -> String {
         let input = input.replacingOccurrences(of: "x", with: "*")
@@ -290,6 +317,7 @@ class PopComputer : PopComputerDelegate {
         print("nextMathOperator : \(nextMathOperator?.expSymbol ?? "nil")")
         print("tempExpressionLine : '\(tempExpressionLine)'")
         print("tempResultLine : '\(tempResultLine)'")
+        print("popExpHandler.showPopExps : '\(popExpHandler.showPopExps())'")
         print("")
     }
     
