@@ -26,7 +26,7 @@ struct KeyMemoryView: View {
     }
     
     private var isMemoryButtonDisabled: Bool {
-        guard !(key == .keyMplus || key == .keyMminus || key == .keyMS) else
+        guard !(key == .keyMplus || key == .keyMminus || key == .keyMS || key == .keyMmenu) else
         { return false }
         
         return !popping.isMemory

@@ -60,8 +60,8 @@ class PoppingModel: ObservableObject {
     // MARK: SAMPLE DATA
     static var previewSampleData: PoppingModel {
         let sample = PoppingModel()
-        sample.displayedExpressionLine = "188 + 35"
-        sample.displayedResultLine = "223.0"
+        sample.displayedExpressionLine = "634 + 85"
+        sample.displayedResultLine = "719"
         return sample
     }
     

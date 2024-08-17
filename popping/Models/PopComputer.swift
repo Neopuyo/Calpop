@@ -100,7 +100,11 @@ class PopComputer : PopComputerDelegate {
             specialPressed(key)
             
         case .memory:
-            popMemoryHandler.memoryKeyPressed(key)
+            if key == .keyMmenu {
+                checkValues() // [+] Only temporary to print debug easily
+            } else {
+                popMemoryHandler.memoryKeyPressed(key)
+            }
             
         default:
             print("🌵 [\(key.kind.rawValue)] key not handled yet")
@@ -278,7 +282,7 @@ class PopComputer : PopComputerDelegate {
         // [N] : The three following force unwraps are guaranted by the guard statement above
         let formatedLeft: String = formatInputBeforeEvaluate(leftOperand!)
         let formatedRight: String = formatInputBeforeEvaluate(rightOperand!)
-        let expressionString: String = mathOperator!.isPrioritary ? "(\(formatedLeft)) \(mathOperator!.expSymbol) \(formatedRight)" : "\(formatedLeft) \(mathOperator!.expSymbol) \(formatedRight)"
+        let expressionString: String = mathOperator!.isPrioritary ? "(\(formatedLeft)) \(mathOperator!.computeSymbol) \(formatedRight)" : "\(formatedLeft) \(mathOperator!.computeSymbol) \(formatedRight)"
         
         let expression : Expression = Expression(expressionString)
         do {
@@ -312,7 +316,13 @@ class PopComputer : PopComputerDelegate {
 //    }
     
     private func formatInputBeforeEvaluate(_ input:String) -> String {
-        let input = input.replacingOccurrences(of: "x", with: "*")
+        print("Input : \(input)", terminator: " -> ")
+        let input = input
+            .replacingOccurrences(of: "􀅾", with: "*")
+            .replacingOccurrences(of: "􀅿", with: "/")
+            .replacingOccurrences(of: "􀅼", with: "+")
+            .replacingOccurrences(of: "􀅽", with: "-")
+        print("\(input)")
         return input
     }
     
@@ -329,8 +339,8 @@ class PopComputer : PopComputerDelegate {
         print("MODE : \(inputMode.rawValue)")
         print("LeftOperand : \(leftOperand ?? "nil")")
         print("rightOperand : \(rightOperand ?? "nil")")
-        print("mathOperator : \(mathOperator?.expSymbol ?? "nil")")
-        print("nextMathOperator : \(nextMathOperator?.expSymbol ?? "nil")")
+        print("mathOperator : \(mathOperator?.computeSymbol ?? "nil")")
+        print("nextMathOperator : \(nextMathOperator?.computeSymbol ?? "nil")")
         print("tempExpressionLine : '\(tempExpressionLine)'")
         print("tempResultLine : '\(tempResultLine)'")
         print("popExpHandler.showPopExps : '\(popExpHandler.showPopExps())'")

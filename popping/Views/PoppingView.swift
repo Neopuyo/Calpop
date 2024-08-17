@@ -14,8 +14,7 @@ struct PoppingView: View {
             VStack(spacing:0) {
                 
                 // HEADER
-                Rectangle()
-                    .fill(Color.whiteToBlack)
+                Spacer()
                     .frame(height: geo.size.height * 58 / 932)
                 
                 
@@ -24,8 +23,7 @@ struct PoppingView: View {
                     .frame(height: geo.size.height * 286 / 932)
                 
                 // MID SEPARATOR
-                Rectangle()
-                    .fill(Color.whiteToBlack)
+                Spacer()
                     .frame(height: geo.size.height * 38 / 932)
                 
                 
@@ -35,8 +33,7 @@ struct PoppingView: View {
                 
                 
                 // FOOTER
-                Rectangle()
-                    .fill(Color.whiteToBlack)
+                Spacer()
                     .frame(height: geo.size.height * 38 / 932)
                 
             }
@@ -48,5 +45,5 @@ struct PoppingView: View {
 
 #Preview {
     PoppingView()
-        .environmentObject(PoppingModel())
+        .environmentObject(PoppingModel.previewSampleData)
 }

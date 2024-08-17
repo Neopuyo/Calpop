@@ -17,8 +17,7 @@ struct PopPadView: View {
                     .frame(height: geo.size.height * 25 / 507)
                 
                 // Memory to Special Spacer
-                Rectangle()
-                    .fill(Color.whiteToBlack)
+                Spacer()
                     .frame(height: geo.size.height * 20 / 507)
                 
                 HStack(alignment: .top, spacing:0) {

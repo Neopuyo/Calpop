@@ -25,53 +25,70 @@ struct PopScreenView: View {
                     )
                     
         
-            VStack(spacing:0) {
-                Spacer()
+            VStack(alignment: .trailing, spacing:0) {
+                
                 
                 // Test Only ([+] set a test environnement variable to display debug items ?)
-                Button("Check Values", systemImage: "arrow.up") {
-                    popping.checkValues()
-                }
-                .foregroundStyle(.specialBlue)
-                .font(.caption2)
-                .frame(maxWidth: .infinity, alignment: .trailing)
-                .padding(.trailing)
-                
-                Text(popping.displayedInputMode.rawValue)
-                    .foregroundStyle(.specialBlue)
-                    .font(.caption2)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-                    .padding(.trailing)
+//                Button("Check Values", systemImage: "arrow.up") {
+//                    popping.checkValues()
+//                }
+//                .foregroundStyle(.specialBlue)
+//                .font(.caption2)
+//                .frame(maxWidth: .infinity, alignment: .trailing)
+//                .padding(.trailing)
+//                
+//                Text(popping.displayedInputMode.rawValue)
+//                    .foregroundStyle(.specialBlue)
+//                    .font(.caption2)
+//                    .frame(maxWidth: .infinity, alignment: .trailing)
+//                    .padding(.trailing)
                 // ------------------------------------------------------------
                 
+                HStack(spacing:0) {
+                    Button(action: {
+                        print("UNI : \("􀆈".unicodeScalars.map { $0.value })")
+                        print("\(String(1048968, radix: 16))")
+                    }, label: {
+                        Image(systemName: "slider.horizontal.3")
+                            .frame(width: 53 * ratio, height: 53 * ratio, alignment: .center)
+                    })
+                    Spacer()
+                    Button(action: {}, label: {
+                        Image(systemName: "clock.arrow.circlepath")
+                            .frame(width: 53 * ratio, height: 53 * ratio, alignment: .center)
+                    })
+                }
+                .font(.system(size: 25.0 * ratio, weight: .semibold))
+                .foregroundColor(Color.white)
+                
+                Spacer()
+                    .frame(maxWidth: .infinity)
+                
                 // Put a " " instead of empty string to fix height
-                Text(
-                    popping.displayedExpressionLine == "" ? " " : popping.displayedExpressionLine
-                    )
-                    .padding()
+                Text(displayingExpLine)
                     .font(.system(size: 25 * ratio , design: .rounded))
                     .foregroundStyle(Color.white)
                     .lineLimit(1)
                     .allowsTightening(false)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-
-               
-                Text(displayingResultLine())
-                    .font(.system(size: 90 * ratio , design: .default))
-                    .padding()
-                    .lineLimit(1)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-                    .foregroundStyle(Color.white)
+                    .frame(height: 50 * ratio, alignment: .trailing)
 
                 Spacer()
+                    .frame(height: 5 * ratio)
+               
+                Text(displayingResultLine)
+                    .font(.system(size: 90 * ratio , design: .default))
+                    .lineLimit(1)
+                    .frame(height: 75 * ratio, alignment: .trailing)
+                    .foregroundStyle(Color.white)
+
             }
+            .padding(20.0 * ratio)
         }
     }
 
     
     // MARK: - Private methods
-    private func displayingResultLine() -> String {
-//        guard !popping.isError else { return "ERROR" }
+    private var displayingResultLine: String {
         guard !popping.displayedResultLine.isEmpty else {
             print("displayedResultLine is empty : display 0.0")
             return "0.0"
@@ -79,10 +96,28 @@ struct PopScreenView: View {
         return popping.displayedResultLine
     }
     
-    private func displayingNextMathOperator() -> String {
-//        guard !popping.isError else { return "" }
-        guard let nextMathOp = popping.displayedNextMathOperator else { return "" }
-        return nextMathOp.expSymbol
+//    private func displayingNextMathOperator() -> String {
+//        guard let nextMathOp = popping.displayedNextMathOperator else { return "" }
+//        return nextMathOp.computeSymbol
+//    }
+    
+    private var displayingExpLine: String {
+        guard !popping.displayedExpressionLine.isEmpty else { return "" }
+        switch (popping.displayedInputMode) {
+        case .mathOperatorNext:
+            return "\(replaceSymbols(popping.displayedExpressionLine)) ="
+        default:
+            return replaceSymbols(popping.displayedExpressionLine)
+        }
+    }
+    
+    private func replaceSymbols(_ line:String) -> String {
+        let line = line.replacingOccurrences(of: "+", with: PopData.MathOperator.scalarPlus)
+            .replacingOccurrences(of: "- ", with: "\(PopData.MathOperator.scalarMinus) ")
+            .replacingOccurrences(of: "/", with: PopData.MathOperator.scalarDivide)
+            .replacingOccurrences(of: "*", with: PopData.MathOperator.scalarMultiply)
+            
+        return line
     }
     
     

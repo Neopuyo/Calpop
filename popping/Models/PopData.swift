@@ -24,14 +24,14 @@ class PopData {
         case plus = "+"
         case minus = "-"
         case multiply = "x"
-        case divide = "/"
+        case divide = "􀅿"
         
         static func getMathOperator(from sign: String) -> MathOperator? {
             switch (sign) {
-            case "+":          return .plus
-            case "-":          return .minus
-            case "*", "x":     return .multiply
-            case "/":          return .divide
+            case "+", "􀅼":                 return .plus
+            case "-", "􀅽":                 return .minus
+            case "*", "􀅾", "x":            return .multiply
+            case "/", "􀅿":                 return .divide
             
             default:
                 print("Error getMathOperator from '\(sign)' that returns nil") // [+] HANDLE ERROR BETTER
@@ -39,7 +39,12 @@ class PopData {
             }
         }
         
-        var expSymbol: String {
+        static let scalarPlus =  String(Unicode.Scalar(0x2B)!)
+        static let scalarMinus =  String(Unicode.Scalar(0x2212)!)
+        static let scalarDivide =  String(Unicode.Scalar(0x00F7)!)
+        static let scalarMultiply =  String(Unicode.Scalar(0x00D7)!)
+
+        var computeSymbol: String {
             switch (self) {
                 case .plus:     return "+"
                 case .minus:    return "-"
@@ -173,7 +178,7 @@ class PopData {
             case .keyMplus:                  return "M +"
             case .keyMminus:                 return "M -"
             case .keyMS:                     return "MS"
-            case .keyMmenu:                  return "M􀆈"
+            case .keyMmenu:                  return "M \(String(Unicode.Scalar(0x2193)!))"
                 
             default:                         return ""
             }

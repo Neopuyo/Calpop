@@ -167,9 +167,9 @@ class PopExpHandler : PopExpDelegate {
         guard countNormalExp != 1 else { try addFirstNormalPopExpChain(); return }
         
         if exp.mathOperator.isPrioritary {
-            popChain = "(\(popChain)) \(exp.mathOperator.expSymbol) \(exp.rightOperand)"
+            popChain = "(\(popChain)) \(exp.mathOperator.computeSymbol) \(exp.rightOperand)"
         } else {
-            popChain = "\(popChain) \(exp.mathOperator.expSymbol) \(exp.rightOperand)"
+            popChain = "\(popChain) \(exp.mathOperator.computeSymbol) \(exp.rightOperand)"
         }
     }
     
@@ -177,7 +177,7 @@ class PopExpHandler : PopExpDelegate {
         guard let firstNormal = getUniqNormal else { throw PopExpError.uniqExpression }
         guard let exp = firstNormal.getExp else { throw PopExpError.invalidNormalExpValues }
         
-        popChain = "\(exp.leftOperand!) \(exp.mathOperator.expSymbol) \(exp.rightOperand)"
+        popChain = "\(exp.leftOperand!) \(exp.mathOperator.computeSymbol) \(exp.rightOperand)"
     }
     
     // MARK: DEBUG
