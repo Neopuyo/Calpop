@@ -273,22 +273,19 @@ class PopComputer : PopComputerDelegate {
             isError = true
             return
         }
+        let isFirst: Bool = popExpHandler.hasNoNormalExp
+        if !isFirst { leftOperand! = popExpHandler.prepareChain() }// get fresh leftOperand : [+] need RFC about left operand handle management ?
         // [N] : The three following force unwraps are guaranted by the guard statement above
         let formatedLeft: String = formatInputBeforeEvaluate(leftOperand!)
         let formatedRight: String = formatInputBeforeEvaluate(rightOperand!)
-        let expressionString: String = "\(formatedLeft) \(mathOperator!.expSymbol) \(formatedRight)"
+        let expressionString: String = mathOperator!.isPrioritary ? "(\(formatedLeft)) \(mathOperator!.expSymbol) \(formatedRight)" : "\(formatedLeft) \(mathOperator!.expSymbol) \(formatedRight)"
         
         let expression : Expression = Expression(expressionString)
         do {
             let expressionResult: Double = try expression.evaluate()
-            let isFirst: Bool = popExpHandler.hasNoNormalExp
             let normalExp = NormalPopExp(leftOperand: isFirst ? leftOperand : nil, mathOperator: mathOperator!, rightOperand: rightOperand!)
             try popExpHandler.addPopExp(PopExp.normal(normalExp))
             tempResultLine = String(expressionResult)
-            
-            // CONTINUE HERE WIP
-            leftOperand! = String(expressionResult) // [+] need better save method improvement display // popExpHandler.popChain ???
-//            leftOperand! = popExpHandler.prepareChain()
             rightOperand = nil
             mathOperator = nextOP
             nextMathOperator = nextOP

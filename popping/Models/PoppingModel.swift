@@ -55,8 +55,6 @@ class PoppingModel: ObservableObject {
         computer.displayResultLine = displayResultLine
         computer.displayNextMathOperator = displayNextMathOperator
         computer.displayInputMode = displayInputMode
-//        computer.displayToggleSign = displayToggleSign
-        
     }
     
     // MARK: SAMPLE DATA

@@ -146,12 +146,20 @@ class PopExpHandler : PopExpDelegate {
     private func addNormalPopExp(leftOperand: String? = nil, mathOperator: PopData.MathOperator, rightOperand: String) throws {
         guard !(countNormalExp == 0 && leftOperand == nil) else { throw PopExpError.leftOperandRequired }
         guard !(countNormalExp > 0 && leftOperand != nil) else { throw PopExpError.leftOperandForbidden }
+        if isNegTerminated {
+            resolveNegTerminated()
+        }
         let normalExp = NormalPopExp(leftOperand: leftOperand, mathOperator: mathOperator, rightOperand: rightOperand)
         let newPopExp = PopExp.normal(normalExp)
         popExps.append(newPopExp)
         countNormalExp += 1
         isNegTerminated = false
         try addNormalPopExpToChain(normalExp)
+    }
+    
+    private func resolveNegTerminated() {
+        guard isNegTerminated else { return }
+        popChain = "(\(popChain)) * -1"
     }
     
     private func addNormalPopExpToChain(_ exp: NormalPopExp) throws {
