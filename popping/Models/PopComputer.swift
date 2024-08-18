@@ -50,7 +50,9 @@ class PopComputer : PopComputerDelegate {
     var displayNextMathOperator: () -> () = {}
     var displayInputMode: () -> () = {}
     
-    private var isReadyToCompute: Bool { leftOperand != nil && mathOperator != nil && rightOperand != nil }
+    private var isReadyToCompute: Bool { 
+        leftOperand != nil && mathOperator != nil && rightOperand != nil
+    }
     
     var refreshedExpressionLine: String {
         guard !isError else { return "" }
@@ -69,6 +71,7 @@ class PopComputer : PopComputerDelegate {
         // [+] clean this
         case .left, .mathOperator, .mathOperatorNext, .rightFirst, .rightNext:
             return tempResultLine
+            
 //        default:
 //            return nil
         }
@@ -195,6 +198,25 @@ class PopComputer : PopComputerDelegate {
         // update ResltLine too ?
     }
     
+    // [+] check if func arg is needed here
+    private func leftSideFinishedBySpecialFunc(_ speFunc: PopExp) {
+        if tempResultLine.isEmpty {
+            leftOperand = "0"
+        } else {
+            leftOperand = tempResultLine
+            tempResultLine = ""
+        }
+        
+        do {
+            try popExpHandler.addPopExp(PopExp.singleValue(leftOperand!))
+        } catch {
+            print("leftSideFinishedBySpecialKey Error")
+            isError = true
+            return
+        }
+        inputMode = .mathOperatorNext
+    }
+    
     private func resultLineToggledByNegate() {
         if tempResultLine.isEmpty {
             return
@@ -227,6 +249,25 @@ class PopComputer : PopComputerDelegate {
         tempResultLine = ""
         evaluateCurrentExpression(nextOP: PopData.MathOperator.getMathOperator(from: mathKey.stringValue))
     }
+    
+    private func rightSideFinishedBySpecialFunc(_ speFunc: PopExp) {
+        guard mathOperator != nil else { return } // [+] error ?
+        rightOperand = tempResultLine
+        tempResultLine = ""
+        evaluateCurrentExpression(nextOP: PopData.MathOperator.getMathOperator(from: mathOperator!.rawValue))
+    }
+    
+    private func resetNextMathOperator() {
+        mathOperator = nil
+        nextMathOperator = nil
+        displayNextMathOperator()
+    }
+    
+    private func mathOperatorReplacedBySpecialFunc(_ speFunc: PopExp) {
+        resetNextMathOperator()
+        tempResultLine = leftOperand ?? "0"
+        leftSideFinishedBySpecialFunc(speFunc)
+    }
         
     private func setOrSwapOperator(with mathKey: PopData.PopKey) {
         guard let currentOperator = PopData.MathOperator.getMathOperator(from: mathKey.stringValue) else { isError = true ; return }
@@ -237,6 +278,7 @@ class PopComputer : PopComputerDelegate {
     }
     
     
+    // [+] Refractor it
     private func specialPressed(_ key: PopData.PopKey) {
         switch key {
         case .keyClear:
@@ -264,20 +306,55 @@ class PopComputer : PopComputerDelegate {
                 tempResultLine = ""
             }
             displayResultLine()
+        case .keyInverse, .keyPower2, .keySquareRoot:
+            resolveSpecialFunction(key)
             
         default:
             print("🪽 CONTINUE IMPLEMENTING THIS")
         }
     }
     
+    private func resolveSpecialFunction(_ key: PopData.PopKey) {
+        guard key == .keyInverse || key == .keyPower2 || key == .keySquareRoot else { return } // [+] manage it better with a PopComputer error class ?
+        guard let specialFunc = PopExp.KeyDict[key] else { return }
+        
+        switch inputMode {
+        case .left:
+            leftSideFinishedBySpecialFunc(specialFunc)
+        case .mathOperator:
+            mathOperatorReplacedBySpecialFunc(specialFunc)
+        case .rightFirst, .rightNext:
+            rightSideFinishedBySpecialFunc(specialFunc)
+        case .mathOperatorNext:
+            resetNextMathOperator()
+        }
+
+        do {
+            try popExpHandler.addPopExp(specialFunc)
+            try popExpHandler.evaluateSpecialExpression()
+        } catch {
+            print("Error resolveSpecialFunction") // [+] will need error class
+            isError = true // [+] not an error if only ExpressionEmpty Error
+        }
+    
+//        checkValues()
+        tempExpressionLine = popExpHandler.prepareChain()
+        if let result = evaluateExpression(from: tempExpressionLine) {
+            tempResultLine = result
+        }
+        displayResultLine()
+        displayExpLine()
+    }
+
+    
     /// Obj-C func can't be try catch easily
     private func evaluateCurrentExpression(nextOP:PopData.MathOperator? = nil) {
         guard isReadyToCompute else {
-            print("Error evaluateCurrentExpression : !isReadyToCompute")
+            print("Error evaluateCurrentExpression : !isReadyToCompute") // [+] will need error class
             isError = true
             return
         }
-        let isFirst: Bool = popExpHandler.hasNoNormalExp
+        let isFirst: Bool = popExpHandler.hasNoNormalExp && !popExpHandler.isSingleValueStarting // [+] bien tester cet ajout conditionnel (&& !popExpHandler.isSingleValueStarting)
         if !isFirst { leftOperand! = popExpHandler.prepareChain() }// get fresh leftOperand : [+] need RFC about left operand handle management ?
         // [N] : The three following force unwraps are guaranted by the guard statement above
         let formatedLeft: String = formatInputBeforeEvaluate(leftOperand!)
@@ -291,6 +368,7 @@ class PopComputer : PopComputerDelegate {
             try popExpHandler.addPopExp(PopExp.normal(normalExp))
             tempResultLine = String(expressionResult)
             rightOperand = nil
+            // leftOperand = nil // [+] is ok ? Améliorer pour ne pas entrer en conflit avec isReadyToCompute lors de chain compute
             mathOperator = nextOP
             nextMathOperator = nextOP
             inputMode = .mathOperatorNext
@@ -303,17 +381,17 @@ class PopComputer : PopComputerDelegate {
     }
     
     // [?] not used anymore ? later maybe ?
-//    private func evaluateExpression(from exp: String) -> String? {
-//        let expression : Expression = Expression(exp)
-//        do {
-//            let expressionResult: Double = try expression.evaluate()
-//            return String(expressionResult)
-//        } catch {
-//            print("ERROR EVALUATING '\(exp)'")
-//            print(error.localizedDescription)
-//            return nil
-//        }
-//    }
+    private func evaluateExpression(from exp: String) -> String? {
+        let expression : Expression = Expression(exp)
+        do {
+            let expressionResult: Double = try expression.evaluate()
+            return String(expressionResult)
+        } catch {
+            print("ERROR EVALUATING '\(exp)'")
+            print(error.localizedDescription)
+            return nil
+        }
+    }
     
     private func formatInputBeforeEvaluate(_ input:String) -> String {
         print("Input : \(input)", terminator: " -> ")
@@ -345,6 +423,10 @@ class PopComputer : PopComputerDelegate {
         print("tempResultLine : '\(tempResultLine)'")
         print("popExpHandler.showPopExps : '\(popExpHandler.showPopExps())'")
         print("")
+        
+        print("Expression pow : \(Expression.isValidOperator("pow"))")
+        print("Expression ** : \(Expression.isValidOperator("**"))")
+        print("Expression sqrt : \(Expression.isValidOperator("sqrt"))")
     }
     
 

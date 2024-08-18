@@ -105,9 +105,33 @@ struct PopScreenView: View {
         guard !popping.displayedExpressionLine.isEmpty else { return "" }
         switch (popping.displayedInputMode) {
         case .mathOperatorNext:
-            return "\(replaceSymbols(popping.displayedExpressionLine)) ="
+            return "\(makeReadable(popping.displayedExpressionLine)) ="
         default:
-            return replaceSymbols(popping.displayedExpressionLine)
+            return makeReadable(popping.displayedExpressionLine)
+        }
+    }
+    
+    // [+] Todo : use a model and/or extend String type
+    private func makeReadable(_ line: String) -> String {
+        var readableLine:String = line
+        readableLine = replaceSymbols(readableLine)
+        readableLine = replacePowFunction(readableLine)
+        return readableLine
+    }
+    
+    private func replacePowFunction(_ line: String) -> String {
+        var line = line
+        let pattern = "pow\\((.*?), 2\\)"
+        do {
+            let regex = try NSRegularExpression(pattern: pattern, options: [])
+            var range = NSRange(location: 0, length: line.utf16.count)
+            while let match = regex.firstMatch(in: line, options: [], range: range) {
+                line = regex.stringByReplacingMatches(in: line, options: [], range: match.range, withTemplate: "pow2($1)")
+                range = NSRange(location: 0, length: line.utf16.count)
+            }
+            return line
+        } catch {
+            return line
         }
     }
     
@@ -116,7 +140,6 @@ struct PopScreenView: View {
             .replacingOccurrences(of: "- ", with: "\(PopData.MathOperator.scalarMinus) ")
             .replacingOccurrences(of: "/", with: PopData.MathOperator.scalarDivide)
             .replacingOccurrences(of: "*", with: PopData.MathOperator.scalarMultiply)
-            
         return line
     }
     

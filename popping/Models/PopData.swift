@@ -24,7 +24,7 @@ class PopData {
         case plus = "+"
         case minus = "-"
         case multiply = "x"
-        case divide = "􀅿"
+        case divide = "/"
         
         static func getMathOperator(from sign: String) -> MathOperator? {
             switch (sign) {
@@ -172,7 +172,7 @@ class PopData {
             case .keyClearEntry:             return "CE"
             case .keyResult:                 return "="
             case .keyInverse:                return "1/x"
-            case .keyPower2:                 return "x^2"
+            case .keyPower2:                 return "x²"
             case .keyMC:                     return "MC"
             case .keyMR:                     return "MR"
             case .keyMplus:                  return "M +"

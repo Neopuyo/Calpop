@@ -35,10 +35,154 @@
             filePath = "popping/Models/PopExp.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
+            startingLineNumber = "198"
+            endingLineNumber = "198"
             landmarkName = "addNegatePopExp()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "258A76D9-EDB9-4DBE-81C5-EC4D478104D8"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "popping/Models/PopComputer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "318"
+            endingLineNumber = "318"
+            landmarkName = "resolveSpecialFunction(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "258A76D9-EDB9-4DBE-81C5-EC4D478104D8 - 34c4a4463f524f01"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "popping.PopComputer.resolveSpecialFunction(popping.PopData.PopKey) -&gt; ()"
+                  moduleName = "popping"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/loup/Files/Loup/Formations/DEV/iOSAppTrainning/popping/popping/Models/PopComputer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "278"
+                  endingLineNumber = "278"
+                  offsetFromSymbolStart = "104">
+               </Location>
+               <Location
+                  uuid = "258A76D9-EDB9-4DBE-81C5-EC4D478104D8 - 34c4a4463f524cb4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "popping.PopComputer.resolveSpecialFunction(popping.PopData.PopKey) -&gt; ()"
+                  moduleName = "popping"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/loup/Files/Loup/Formations/DEV/iOSAppTrainning/popping/popping/Models/PopComputer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "299"
+                  endingLineNumber = "299"
+                  offsetFromSymbolStart = "144">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DCA79414-355C-4AEB-84B8-58DD4258DD75"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "popping/Models/PopComputer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "352"
+            endingLineNumber = "352"
+            landmarkName = "evaluateCurrentExpression(nextOP:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E5F94881-1391-4C13-B870-FE77410A2C99"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "popping/Models/PopComputer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "367"
+            endingLineNumber = "367"
+            landmarkName = "evaluateCurrentExpression(nextOP:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AD9B18A0-BAC0-4ECE-AA5C-56F6ABA8C117"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "popping/Models/PopComputer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "385"
+            endingLineNumber = "385"
+            landmarkName = "evaluateExpression(from:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1D444410-2A68-47D7-BC94-EB3105FF2D51"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "popping/Models/PopExp.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "266"
+            endingLineNumber = "266"
+            landmarkName = "addFirstNormalPopExpChain()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1D444410-2A68-47D7-BC94-EB3105FF2D51 - 5b7c43d820e8ec9f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "popping.PopExpHandler.addFirstNormalPopExpChain() throws -&gt; ()"
+                  moduleName = "popping"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/loup/Files/Loup/Formations/DEV/iOSAppTrainning/popping/popping/Models/PopExp.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "265"
+                  endingLineNumber = "265"
+                  offsetFromSymbolStart = "284">
+               </Location>
+               <Location
+                  uuid = "1D444410-2A68-47D7-BC94-EB3105FF2D51 - 5b7c43d820e8ed7e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "popping.PopExpHandler.addFirstNormalPopExpChain() throws -&gt; ()"
+                  moduleName = "popping"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/loup/Files/Loup/Formations/DEV/iOSAppTrainning/popping/popping/Models/PopExp.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "264"
+                  endingLineNumber = "264"
+                  offsetFromSymbolStart = "284">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

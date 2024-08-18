@@ -113,7 +113,6 @@ struct PopKeyMathButton: ButtonStyle {
     private var isMathOperatorSelected: Bool {
         guard key.kind == .math && key != .keyResult else { return false }
         guard let mathOperator = popping.displayedNextMathOperator else { return false }
-        
         return key.stringValue == mathOperator.rawValue
     }
     
