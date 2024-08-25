@@ -11,9 +11,9 @@ struct KeyMemoryView: View {
     let key: PopData.PopKey
     let finalSize: CGSize
     let paddingSize: CGSize
-    @EnvironmentObject var popping: PoppingModel
-    
     let action: (_: PopData.PopKey) -> ()
+
+    @EnvironmentObject var popping: PoppingModel
     
     var body: some View {
         Button(key.stringValue) {
@@ -26,10 +26,10 @@ struct KeyMemoryView: View {
     }
     
     private var isMemoryButtonDisabled: Bool {
-        guard !(key == .keyMplus || key == .keyMminus || key == .keyMS || key == .keyMmenu) else
+        guard !(key == .keyMplus || key == .keyMminus || key == .keyMS) else
         { return false }
         
-        return !popping.isMemory
+        return popping.displayedMemoryStock.isEmpty
     }
 }
 

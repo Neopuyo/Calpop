@@ -21,7 +21,13 @@ extension PopMemoryError: CustomStringConvertible {
 }
 
 protocol PopMemoryDelegate {
-    func isMemoryEmpty() -> Bool
+    func memoryKeyPressed(_ key: PopData.PopKey)
+    var isEmpty: Bool { get }
+}
+
+struct MemoItem {
+    var exp:String = ""
+    var result: String = ""
 }
 
 
@@ -29,11 +35,38 @@ protocol PopMemoryDelegate {
 
 class PopMemoryHandler : PopMemoryDelegate {
     
+    private(set) var memoryStock: [MemoItem] = memorySampleData // []
+    private var currentMemoryIndex: Int = 0
+    
+    static let memorySampleData : [MemoItem] = [
+        MemoItem(exp: "1 + 2", result: "3"),
+        MemoItem(exp: "200", result: "200"),
+        MemoItem(exp: "100 - 10 - 1 - 5 - 9", result: "75"),
+    ]
+    
+    var isEmpty: Bool { memoryStock.isEmpty }
+    
     func memoryKeyPressed(_ key: PopData.PopKey) {
-        print("Memory key [\(key.rawValue)] not handled yet 🦔")
+        
+        switch (key) {
+            
+        case .keyMmenu:
+            checkMemory()
+            
+        default:
+            print("Memory key [\(key.rawValue)] not handled yet 🦔")
+        }
     }
     
-    func isMemoryEmpty() -> Bool {
-        return true
+    
+    
+    // MARK: - CHECK VALUE
+    private func checkMemory() {
+        guard !memoryStock.isEmpty else { print("Memory stock is empty."); return }
+        print("[Memory stock]")
+        for item in memoryStock {
+            print("'\(item.exp)' = '\(item.result)'")
+        }
     }
+
 }

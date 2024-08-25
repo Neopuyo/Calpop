@@ -16,13 +16,17 @@ class PoppingModel: ObservableObject {
     @Published var displayedResultLine: String = ""
     @Published var displayedInputMode:PopData.InputMode = .left
     @Published var clearEntryAvailable: Bool = false
-    @Published var isMemory: Bool = false
+    @Published var displayedMemoryStock: [MemoItem]
+    
+    @Published var showMemoryPannel: Bool = false
+    
     
     private var popComputer: PopComputer
     
     
     init() {
         self.popComputer = PopComputer()
+        self.displayedMemoryStock = self.popComputer.refreshedMemoryStock
         self.bindComputerDisplayCallbacks(computer: self.popComputer)
     }
     
@@ -51,6 +55,14 @@ class PoppingModel: ObservableObject {
         displayedInputMode = popComputer.refreshedInputMode
     }
     
+    private func displayMemoryStock() {
+        displayedMemoryStock = popComputer.refreshedMemoryStock
+    }
+    
+    private func toogleMemoryPannel() {
+        showMemoryPannel.toggle()
+    }
+    
 
     // MARK: ON INIT
     private func bindComputerDisplayCallbacks(computer: PopComputer) {
@@ -58,6 +70,8 @@ class PoppingModel: ObservableObject {
         computer.displayResultLine = displayResultLine
         computer.displayNextMathOperator = displayNextMathOperator
         computer.displayInputMode = displayInputMode
+        computer.displayMemoryStock = displayMemoryStock
+        computer.toogleMemoryPannel = toogleMemoryPannel
     }
     
     // MARK: SAMPLE DATA

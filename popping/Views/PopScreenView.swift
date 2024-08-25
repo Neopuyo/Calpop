@@ -46,8 +46,7 @@ struct PopScreenView: View {
                 
                 HStack(spacing:0) {
                     Button(action: {
-                        print("UNI : \("􀆈".unicodeScalars.map { $0.value })")
-                        print("\(String(1048968, radix: 16))")
+                        popping.checkValues()
                     }, label: {
                         Image(systemName: "slider.horizontal.3")
                             .frame(width: 53 * ratio, height: 53 * ratio, alignment: .center)

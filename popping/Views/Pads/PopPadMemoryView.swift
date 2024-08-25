@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct PopPadMemoryView: View {
+    
+    @State private var isShowingMemoSheet = false
+    
     @EnvironmentObject var popping: PoppingModel
     let keyGrid: [PopData.PopKey] = PopData.popKeyGridMemory
     
@@ -28,8 +31,15 @@ struct PopPadMemoryView: View {
                 }
                 Spacer()
             }
-//            .padding(.horizontal, geo.size.width * 27 / 396)
         }
+    }
+    
+    private func showMemoSheet() {
+        isShowingMemoSheet = true
+    }
+    
+    private func hideMemoSheet() {
+        isShowingMemoSheet = false
     }
 }
 
