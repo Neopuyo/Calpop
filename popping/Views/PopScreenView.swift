@@ -90,7 +90,9 @@ struct PopScreenView: View {
     // MARK: - Private methods
     private var displayingResultLine: String {
         guard !popping.displayedResultLine.isEmpty else {
-            print("displayedResultLine is empty : display 0.0")
+            if (popping.displayedInputMode == .rightFirst || popping.displayedInputMode == .rightNext) {
+                return ""
+            }
             return "0.0"
         }
         return popping.displayedResultLine

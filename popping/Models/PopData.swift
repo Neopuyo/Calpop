@@ -80,7 +80,7 @@ class PopData {
         case keyPlus, keyMinus, keyMultiply, keyDivide, keyResult
         
         // PopKeyKind.special
-        case keyClearEntry, keyClear, keyDelete, keyInverse, keyPower2, keySquareRoot
+        case keyClearEntry, keyPercent, keyDelete, keyInverse, keyPower2, keySquareRoot
         
         // PopKeyKind.memory
         case keyMC, keyMR, keyMplus, keyMminus, keyMS, keyMmenu
@@ -96,7 +96,7 @@ class PopData {
                 return .digitSpe
             case .keyDivide, .keyMultiply, .keyMinus, .keyPlus, .keyResult:
                 return .math
-            case .keyClearEntry, .keyClear, .keyDelete, .keyInverse, .keyPower2, .keySquareRoot:
+            case .keyClearEntry, .keyPercent, .keyDelete, .keyInverse, .keyPower2, .keySquareRoot:
                 return .special
             case .keyMC, .keyMR, .keyMplus, .keyMminus, .keyMS, .keyMmenu:
                 return .memory
@@ -151,6 +151,15 @@ class PopData {
             return Color.whiteToBlack
         }
         
+        var stringValueVariant: String? {
+            switch self {
+            case .keyClearEntry:
+                return "CE"
+            default:
+                return nil
+            }
+        }
+        
         var stringValue: String {
             switch self {
             case .key0:                      return "0"
@@ -168,8 +177,8 @@ class PopData {
             case .keyMinus:                  return "-"
             case .keyDivide:                 return "/"
             case .keyMultiply:               return "x"
-            case .keyClear:                  return "C"
-            case .keyClearEntry:             return "CE"
+            case .keyPercent:                return "%"
+            case .keyClearEntry:             return "C"
             case .keyResult:                 return "="
             case .keyInverse:                return "1/x"
             case .keyPower2:                 return "x²"
@@ -194,6 +203,7 @@ class PopData {
             case .keyPlusSlashMinus:         return "plus.forwardslash.minus"
             case .keySquareRoot:             return "x.squareroot"
             case .keyResult:                 return "equal"
+            case .keyPercent:                return "percent"
                 
             default:                         return ""
             }
@@ -209,7 +219,7 @@ class PopData {
     
     // 3 x 6
     static let popKeyGridLeft: [[PopKey]] = [
-        [   .keyClear,                .keyClearEntry,         .keyDelete        ],
+        [   .keyPercent,              .keyClearEntry,         .keyDelete        ],
         [   .keyInverse,              .keyPower2,             .keySquareRoot    ],
         [   .key7,                    .key8,                  .key9             ],
         [   .key4,                    .key5,                  .key6             ],

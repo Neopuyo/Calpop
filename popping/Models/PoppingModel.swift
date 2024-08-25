@@ -15,6 +15,7 @@ class PoppingModel: ObservableObject {
     @Published var displayedNextMathOperator: PopData.MathOperator? = nil
     @Published var displayedResultLine: String = ""
     @Published var displayedInputMode:PopData.InputMode = .left
+    @Published var clearEntryAvailable: Bool = false
     @Published var isMemory: Bool = false
     
     private var popComputer: PopComputer
@@ -33,11 +34,13 @@ class PoppingModel: ObservableObject {
     private func displayExpressionLine()
     {
         displayedExpressionLine = popComputer.refreshedExpressionLine
+        clearEntryAvailable = popComputer.clearEntryAvailable
     }
     
     private func displayResultLine() {
         guard let line = popComputer.refreshedResultLine else { return }
         displayedResultLine = line
+        clearEntryAvailable = popComputer.clearEntryAvailable
     }
     
     private func displayNextMathOperator() {

@@ -14,6 +14,7 @@ enum PopExp: Equatable {
     case inverse
     case power2
     case squareRoot
+    case percent
     
     
     static func == (lhs: PopExp, rhs: PopExp) -> Bool {
@@ -33,7 +34,8 @@ enum PopExp: Equatable {
         .keyPlusSlashMinus : .negate,
         .keyInverse : .inverse,
         .keyPower2 : .power2,
-        .keySquareRoot : .squareRoot
+        .keySquareRoot : .squareRoot,
+        .keyPercent : .percent,
     ]
     
     var isNormal: Bool {
@@ -159,7 +161,7 @@ class PopExpHandler : PopExpDelegate {
         case .negate:
             addNegatePopExp()
             
-        case .inverse, .power2, .squareRoot:
+        case .inverse, .power2, .squareRoot, .percent:
             try addSpecialPopExp(popExp)
         
 //        default:
@@ -188,6 +190,8 @@ class PopExpHandler : PopExpDelegate {
             power2Chain()
         case .squareRoot:
             sqrtChain()
+        case .percent:
+            percentChain()
             
         default:
             throw PopExpError.specialExpressionNotFound
@@ -221,6 +225,10 @@ class PopExpHandler : PopExpDelegate {
     
     private func sqrtChain() {
         popChain = "sqrt(\(popChain))"
+    }
+    
+    private func percentChain() {
+        popChain = "(\(popChain)) / 100"
     }
     
     private func addNormalPopExp(leftOperand: String? = nil, mathOperator: PopData.MathOperator, rightOperand: String) throws {
@@ -284,6 +292,8 @@ class PopExpHandler : PopExpDelegate {
                 toPrint += "[pow2]"
             case .squareRoot:
                 toPrint += "[sqrt]"
+            case .percent:
+                toPrint += "[percent]"
             }
         }
         return toPrint

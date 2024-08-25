@@ -13,15 +13,22 @@ struct KeyStringView: View {
     let paddingSize: CGSize
     let action: (_: PopData.PopKey) -> ()
     
+    @EnvironmentObject() var popping: PoppingModel
     
     var body: some View {
-        Button(key.stringValue) {
+        Button(showEntryVariant ? key.stringValueVariant ?? "?" : key.stringValue) {
             action(key)
         }
         .buttonStyle(PopKeyButtonString(finalSize: finalSize, key: key))
         .padding(.horizontal, paddingSize.width)
         .padding(.vertical, paddingSize.height)
     }
+    
+    private var showEntryVariant : Bool {
+        guard key == .keyClearEntry else { return false }
+        return popping.clearEntryAvailable
+    }
+    
 }
 
 

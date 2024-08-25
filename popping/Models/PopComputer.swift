@@ -86,6 +86,9 @@ class PopComputer : PopComputerDelegate {
         return inputMode
     }
     
+    var clearEntryAvailable: Bool {
+        !tempResultLine.isEmpty && inputMode != .mathOperator && inputMode != .mathOperatorNext
+    }
 
     func keyPressed(_ key: PopData.PopKey) {
         switch key.kind {
@@ -281,22 +284,8 @@ class PopComputer : PopComputerDelegate {
     // [+] Refractor it
     private func specialPressed(_ key: PopData.PopKey) {
         switch key {
-        case .keyClear:
-            // [C] clear all
-            tempResultLine = ""
-            tempExpressionLine = ""
-            leftOperand = nil
-            rightOperand = nil
-            mathOperator = nil
-            nextMathOperator = nil
-            inputMode = .left
-            isError = false
-            popExpHandler.resetPopExps()
-            updateDisplays()
         case .keyClearEntry:
-            // [C] clear Entry
-            tempResultLine = ""
-            displayResultLine()
+            clearEntryAvailable ? clearEntry() : clearAll()
         case .keyDelete:
             guard !(inputMode == .mathOperator || inputMode == .mathOperatorNext) else { return }
             guard !tempResultLine.isEmpty else { return }
@@ -306,16 +295,33 @@ class PopComputer : PopComputerDelegate {
                 tempResultLine = ""
             }
             displayResultLine()
-        case .keyInverse, .keyPower2, .keySquareRoot:
+        case .keyInverse, .keyPower2, .keySquareRoot, .keyPercent:
             resolveSpecialFunction(key)
-            
         default:
             print("🪽 CONTINUE IMPLEMENTING THIS")
         }
     }
     
+    private func clearAll() {
+        tempResultLine = ""
+        tempExpressionLine = ""
+        leftOperand = nil
+        rightOperand = nil
+        mathOperator = nil
+        nextMathOperator = nil
+        inputMode = .left
+        isError = false
+        popExpHandler.resetPopExps()
+        updateDisplays()
+    }
+    
+    private func clearEntry() {
+        tempResultLine = ""
+        displayResultLine()
+    }
+    
     private func resolveSpecialFunction(_ key: PopData.PopKey) {
-        guard key == .keyInverse || key == .keyPower2 || key == .keySquareRoot else { return } // [+] manage it better with a PopComputer error class ?
+        guard key == .keyInverse || key == .keyPower2 || key == .keySquareRoot || key == .keyPercent else { return } // [+] manage it better with a PopComputer error class ?
         guard let specialFunc = PopExp.KeyDict[key] else { return }
         
         switch inputMode {
@@ -394,7 +400,6 @@ class PopComputer : PopComputerDelegate {
     }
     
     private func formatInputBeforeEvaluate(_ input:String) -> String {
-        print("Input : \(input)", terminator: " -> ")
         let input = input
             .replacingOccurrences(of: "􀅾", with: "*")
             .replacingOccurrences(of: "􀅿", with: "/")
@@ -423,10 +428,6 @@ class PopComputer : PopComputerDelegate {
         print("tempResultLine : '\(tempResultLine)'")
         print("popExpHandler.showPopExps : '\(popExpHandler.showPopExps())'")
         print("")
-        
-        print("Expression pow : \(Expression.isValidOperator("pow"))")
-        print("Expression ** : \(Expression.isValidOperator("**"))")
-        print("Expression sqrt : \(Expression.isValidOperator("sqrt"))")
     }
     
 
