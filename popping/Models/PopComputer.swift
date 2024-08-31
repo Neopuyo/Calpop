@@ -29,6 +29,7 @@ class PopComputer : PopComputerDelegate {
     
     private var popExpHandler: PopExpHandler = PopExpHandler()
     private var popMemoryHandler: PopMemoryHandler = PopMemoryHandler()
+
     
     private var tempResultLine: String = ""
     private var tempExpressionLine: String = ""
@@ -50,8 +51,14 @@ class PopComputer : PopComputerDelegate {
     var displayResultLine: () -> () = {}
     var displayNextMathOperator: () -> () = {}
     var displayInputMode: () -> () = {}
-    var displayMemoryStock: () -> () = {}
     var toogleMemoryPannel: () -> () = {}
+    var displayMemoryStock: () -> () = {} {
+        didSet { popMemoryHandler.displayMemoryStock = displayMemoryStock }
+    }
+    var displayMemoryCurrent: () -> () = {} {
+        didSet { popMemoryHandler.displayMemoryCurrent = displayMemoryCurrent }
+    }
+
     
     private var isReadyToCompute: Bool { 
         leftOperand != nil && mathOperator != nil && rightOperand != nil
@@ -93,6 +100,10 @@ class PopComputer : PopComputerDelegate {
         return popMemoryHandler.memoryStock
     }
     
+    var refreshedCurrentMemoryItem: MemoItem? {
+        return popMemoryHandler.currentMemoryItem
+    }
+    
     var clearEntryAvailable: Bool {
         !tempResultLine.isEmpty && inputMode != .mathOperator && inputMode != .mathOperatorNext
     }
@@ -113,13 +124,17 @@ class PopComputer : PopComputerDelegate {
             specialPressed(key)
             
         case .memory:
-            guard key != .keyMmenu else { toogleMemoryPannel(); return }
+            if key == .keyMmenu { toogleMemoryPannel() }
             popMemoryHandler.memoryKeyPressed(key)
             
             
         default:
             print("🌵 [\(key.kind.rawValue)] key not handled yet")
         }
+    }
+    
+    func memoryAction(_ action: PopMemoryAction) {
+        popMemoryHandler.memoryAction(action)
     }
     
     

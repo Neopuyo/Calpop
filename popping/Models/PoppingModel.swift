@@ -16,8 +16,9 @@ class PoppingModel: ObservableObject {
     @Published var displayedResultLine: String = ""
     @Published var displayedInputMode:PopData.InputMode = .left
     @Published var clearEntryAvailable: Bool = false
-    @Published var displayedMemoryStock: [MemoItem]
     
+    @Published var displayedMemoryStock: [MemoItem]
+    @Published var currentMemoryItem: MemoItem?
     @Published var showMemoryPannel: Bool = false
     
     
@@ -27,12 +28,17 @@ class PoppingModel: ObservableObject {
     init() {
         self.popComputer = PopComputer()
         self.displayedMemoryStock = self.popComputer.refreshedMemoryStock
+        self.currentMemoryItem = self.popComputer.refreshedCurrentMemoryItem
         self.bindComputerDisplayCallbacks(computer: self.popComputer)
     }
     
     
     func keyPressed(_ key: PopData.PopKey) {
         popComputer.keyPressed(key)
+    }
+
+    func memoryAction(_ action : PopMemoryAction) {
+        popComputer.memoryAction(action)
     }
     
     private func displayExpressionLine()
@@ -59,6 +65,10 @@ class PoppingModel: ObservableObject {
         displayedMemoryStock = popComputer.refreshedMemoryStock
     }
     
+    private func displayMemoryCurrent() {
+        currentMemoryItem = popComputer.refreshedCurrentMemoryItem
+    }
+    
     private func toogleMemoryPannel() {
         showMemoryPannel.toggle()
     }
@@ -71,8 +81,10 @@ class PoppingModel: ObservableObject {
         computer.displayNextMathOperator = displayNextMathOperator
         computer.displayInputMode = displayInputMode
         computer.displayMemoryStock = displayMemoryStock
+        computer.displayMemoryCurrent = displayMemoryCurrent
         computer.toogleMemoryPannel = toogleMemoryPannel
     }
+    // [?][+] need deinit to make sure clean is done ?
     
     // MARK: SAMPLE DATA
     static var previewSampleData: PoppingModel {

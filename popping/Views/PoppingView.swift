@@ -42,13 +42,7 @@ struct PoppingView: View {
             .ignoresSafeArea()
             .padding(.horizontal, geo.size.height * 17 / 932 )
             .sheet(isPresented: $popping.showMemoryPannel, content: {
-                VStack {
-                    
-                    Text("OKOK")
-                    Button("Dismiss") {
-                        popping.showMemoryPannel.toggle()
-                    }
-                }
+                MemoryStockMenuView()
             })
         }
     }

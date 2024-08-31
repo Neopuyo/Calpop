@@ -13,6 +13,8 @@
 		1D33478F2C5E33940094806E /* PopExp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D33478E2C5E33940094806E /* PopExp.swift */; };
 		1D36B9322C43F38D00DDA278 /* Expression in Frameworks */ = {isa = PBXBuildFile; productRef = 1D36B9312C43F38D00DDA278 /* Expression */; };
 		1D560C112C4C09B500201C4F /* PopPadRightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D560C102C4C09B500201C4F /* PopPadRightView.swift */; };
+		1D58C8582C830A7000FC2534 /* MemoryStockMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D58C8572C830A7000FC2534 /* MemoryStockMenuView.swift */; };
+		1D58C85A2C83262900FC2534 /* MemoryItemCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D58C8592C83262900FC2534 /* MemoryItemCellView.swift */; };
 		1D728F762C4BC5EE002A5A93 /* PopPadLeftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D728F752C4BC5EE002A5A93 /* PopPadLeftView.swift */; };
 		1D9126502C4CFC900087EAC2 /* PopPadMemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D91264F2C4CFC900087EAC2 /* PopPadMemoryView.swift */; };
 		1DBA1CE92C6B7F7000DB4190 /* PopMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DBA1CE82C6B7F7000DB4190 /* PopMemory.swift */; };
@@ -37,6 +39,8 @@
 		1D2CCC2B2C2FF87600C7126D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1D33478E2C5E33940094806E /* PopExp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopExp.swift; sourceTree = "<group>"; };
 		1D560C102C4C09B500201C4F /* PopPadRightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopPadRightView.swift; sourceTree = "<group>"; };
+		1D58C8572C830A7000FC2534 /* MemoryStockMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStockMenuView.swift; sourceTree = "<group>"; };
+		1D58C8592C83262900FC2534 /* MemoryItemCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryItemCellView.swift; sourceTree = "<group>"; };
 		1D728F752C4BC5EE002A5A93 /* PopPadLeftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopPadLeftView.swift; sourceTree = "<group>"; };
 		1D91264F2C4CFC900087EAC2 /* PopPadMemoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopPadMemoryView.swift; sourceTree = "<group>"; };
 		1DBA1CE82C6B7F7000DB4190 /* PopMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopMemory.swift; sourceTree = "<group>"; };
@@ -108,10 +112,20 @@
 			children = (
 				1DC147B42C42650E004B983D /* PoppingView.swift */,
 				1DC147BB2C428035004B983D /* PopScreenView.swift */,
+				1D58C8562C830A1100FC2534 /* Menus */,
 				1D728F742C4BC597002A5A93 /* Pads */,
 				1DE4DB862C4D046700B2CC44 /* Keys */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		1D58C8562C830A1100FC2534 /* Menus */ = {
+			isa = PBXGroup;
+			children = (
+				1D58C8572C830A7000FC2534 /* MemoryStockMenuView.swift */,
+				1D58C8592C83262900FC2534 /* MemoryItemCellView.swift */,
+			);
+			path = Menus;
 			sourceTree = "<group>";
 		};
 		1D728F742C4BC597002A5A93 /* Pads */ = {
@@ -247,6 +261,7 @@
 				1D728F762C4BC5EE002A5A93 /* PopPadLeftView.swift in Sources */,
 				1D33478F2C5E33940094806E /* PopExp.swift in Sources */,
 				1DE4DB8C2C4D0AF700B2CC44 /* KeySFView.swift in Sources */,
+				1D58C85A2C83262900FC2534 /* MemoryItemCellView.swift in Sources */,
 				1DD499602C6CFA5F00C11E5D /* KeyMathView.swift in Sources */,
 				1DC147BE2C4283AA004B983D /* PopPadView.swift in Sources */,
 				1D560C112C4C09B500201C4F /* PopPadRightView.swift in Sources */,
@@ -256,6 +271,7 @@
 				1DE4DB8E2C4D0BED00B2CC44 /* KeyMemoryView.swift in Sources */,
 				1DC147C02C42879F004B983D /* PopKeyView.swift in Sources */,
 				1DC147B52C42650E004B983D /* PoppingView.swift in Sources */,
+				1D58C8582C830A7000FC2534 /* MemoryStockMenuView.swift in Sources */,
 				1DE4DB852C4D03BA00B2CC44 /* PopKeyButtonStyles.swift in Sources */,
 				1DFBFFC72C6CA1980010B53B /* PopComputer.swift in Sources */,
 				1DC147BA2C426940004B983D /* PopData.swift in Sources */,

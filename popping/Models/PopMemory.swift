@@ -12,6 +12,10 @@ enum PopMemoryError: Error {
     case unknown
 }
 
+enum PopMemoryAction {
+    case select(MemoItem)
+}
+
 extension PopMemoryError: CustomStringConvertible {
     public var description: String {
         switch self {
@@ -25,8 +29,10 @@ protocol PopMemoryDelegate {
     var isEmpty: Bool { get }
 }
 
-struct MemoItem {
-    var exp:String = ""
+struct MemoItem: Identifiable, Equatable, Hashable {
+    let id: UUID = UUID()
+    
+    var exp: String = ""
     var result: String = ""
 }
 
@@ -35,8 +41,20 @@ struct MemoItem {
 
 class PopMemoryHandler : PopMemoryDelegate {
     
-    private(set) var memoryStock: [MemoItem] = memorySampleData // []
-    private var currentMemoryIndex: Int = 0
+    private(set) var memoryStock: [MemoItem] {
+        didSet { displayMemoryStock() }
+    }
+    private(set) var currentMemoryItem: MemoItem? {
+        didSet { displayMemoryCurrent() }
+    }
+    
+    var displayMemoryStock: () -> () = {}
+    var displayMemoryCurrent: () -> () = {}
+    
+    init() {
+        self.memoryStock = PopMemoryHandler.memorySampleData // [!] only for first tests
+        self.currentMemoryItem = PopMemoryHandler.memorySampleData.first // [!] only for first tests
+    }
     
     static let memorySampleData : [MemoItem] = [
         MemoItem(exp: "1 + 2", result: "3"),
@@ -58,6 +76,17 @@ class PopMemoryHandler : PopMemoryDelegate {
         }
     }
     
+    func memoryAction(_ action : PopMemoryAction) {
+        switch (action) {
+        case .select(let memoItem):
+            selectMemoryItem(memoItem)
+        }
+        
+    }
+    
+    private func selectMemoryItem(_ memoItem: MemoItem) {
+        currentMemoryItem = memoItem
+    }
     
     
     // MARK: - CHECK VALUE
@@ -65,6 +94,7 @@ class PopMemoryHandler : PopMemoryDelegate {
         guard !memoryStock.isEmpty else { print("Memory stock is empty."); return }
         print("[Memory stock]")
         for item in memoryStock {
+            print("[\(item == currentMemoryItem ? "*" : " ")]", terminator: " ")
             print("'\(item.exp)' = '\(item.result)'")
         }
     }

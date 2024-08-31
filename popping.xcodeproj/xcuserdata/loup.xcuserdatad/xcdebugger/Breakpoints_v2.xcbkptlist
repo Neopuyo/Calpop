@@ -51,8 +51,8 @@
             filePath = "popping/Models/PopComputer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "329"
-            endingLineNumber = "329"
+            startingLineNumber = "344"
+            endingLineNumber = "344"
             landmarkName = "resolveSpecialFunction(_:)"
             landmarkType = "7">
             <Locations>
@@ -99,8 +99,8 @@
             filePath = "popping/Models/PopComputer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "363"
-            endingLineNumber = "363"
+            startingLineNumber = "378"
+            endingLineNumber = "378"
             landmarkName = "evaluateCurrentExpression(nextOP:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -115,8 +115,8 @@
             filePath = "popping/Models/PopComputer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "378"
-            endingLineNumber = "378"
+            startingLineNumber = "393"
+            endingLineNumber = "393"
             landmarkName = "evaluateCurrentExpression(nextOP:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -131,8 +131,8 @@
             filePath = "popping/Models/PopComputer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "396"
-            endingLineNumber = "396"
+            startingLineNumber = "411"
+            endingLineNumber = "411"
             landmarkName = "evaluateExpression(from:)"
             landmarkType = "7">
          </BreakpointContent>
