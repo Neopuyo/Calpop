@@ -25,11 +25,24 @@ struct KeyMemoryView: View {
 //        .padding(.vertical, paddingSize.height)
     }
     
-    private var isMemoryButtonDisabled: Bool {
-        guard !(key == .keyMplus || key == .keyMminus || key == .keyMS) else
-        { return false }
+    private var isMemoryButtonDisabled: Bool {        
+        switch (key, popping.displayedInputMode) {
+        case (.keyMS, .rightFirst),     (.keyMS, .rightNext),
+             (.keyMplus, .rightFirst),  (.keyMplus, .rightNext),
+             (.keyMminus, .rightFirst), (.keyMminus, .rightNext) :
+            return true
+            
+        case (.keyMR, .rightFirst),      (.keyMR, .rightNext):
+            return true
+            
+        case (.keyMS, _),
+             (.keyMplus, _),
+             (.keyMminus, _) :
+            return false
         
-        return popping.displayedMemoryStock.isEmpty
+        default:
+            return  popping.displayedMemoryStock.isEmpty
+        }
     }
 }
 

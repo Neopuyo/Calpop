@@ -34,13 +34,6 @@ struct PopPadMemoryView: View {
         }
     }
     
-    private func showMemoSheet() {
-        isShowingMemoSheet = true
-    }
-    
-    private func hideMemoSheet() {
-        isShowingMemoSheet = false
-    }
 }
 
 @available(iOS 17, *)

@@ -36,7 +36,8 @@ class PoppingModel: ObservableObject {
     func keyPressed(_ key: PopData.PopKey) {
         popComputer.keyPressed(key)
     }
-
+    
+    /// To handle non key actions, like a swipe delete list
     func memoryAction(_ action : PopMemoryAction) {
         popComputer.memoryAction(action)
     }

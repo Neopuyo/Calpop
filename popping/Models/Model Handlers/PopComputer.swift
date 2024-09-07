@@ -124,8 +124,7 @@ class PopComputer : PopComputerDelegate {
             specialPressed(key)
             
         case .memory:
-            if key == .keyMmenu { toogleMemoryPannel() }
-            popMemoryHandler.memoryKeyPressed(key)
+            memoryPressed(key)
             
             
         default:
@@ -137,6 +136,102 @@ class PopComputer : PopComputerDelegate {
         popMemoryHandler.memoryAction(action)
     }
     
+    private func memoryPressed(_ key: PopData.PopKey) {
+        switch (key) {
+        case .keyMmenu:
+            toogleMemoryPannel()
+            
+        case .keyMminus, .keyMplus:
+            handleMemoryAddAction(method: key == .keyMplus ? .add : .substract)
+            
+        case .keyMS:
+            handleMemoryStockAction(method: .add)
+            
+        case .keyMC:
+            handleMemoryClearAction()
+            
+        case .keyMR:
+            handleMemoryRecallAction()
+            
+        default:
+            print("Error. This key '\(key)' isn't a memory one. This shouldn't happen.")
+        }
+        popMemoryHandler.memoryKeyPressed(key) // [?] Utility ?
+    }
+    
+    private func handleMemoryAddAction(method: PopMemoryAction.Method) {
+        guard !popMemoryHandler.isEmpty else { handleMemoryStockAction(method: method); return }
+        
+        switch inputMode {
+        case .left:
+            popMemoryHandler.memoryAction(.add(tempResultLine.isEmpty ? "0" : tempResultLine, method))
+            
+        case .mathOperator:
+            popMemoryHandler.memoryAction(.add(leftOperand ?? "0", method))
+            
+        case .rightFirst, .rightNext:
+            print("handleMemoryAddAction wrong case reached : M+ and M- buttons should be disabled") // [?][!]
+            return
+            
+        case .mathOperatorNext:
+            popMemoryHandler.memoryAction(.add(popExpHandler.prepareChain(), method))
+        }
+    }
+    
+    private func handleMemoryStockAction(method: PopMemoryAction.Method) {
+        switch inputMode {
+        case .left:
+            popMemoryHandler.memoryAction(.create(tempResultLine.isEmpty ? "0" : tempResultLine, method))
+        
+        case .mathOperator:
+            popMemoryHandler.memoryAction(.create(leftOperand ?? "0", method))
+            
+        case .rightFirst, .rightNext:
+            print("handleMemoryStockAction wrong case reached : MS button should be disabled") // [?][!]
+            return
+            
+        case .mathOperatorNext:
+            popMemoryHandler.memoryAction(.create(popExpHandler.prepareChain(), method))
+ 
+        }
+    }
+    
+    private func handleMemoryClearAction() {
+        popMemoryHandler.memoryAction(.clear)
+    }
+    
+    private func handleMemoryRecallAction() {
+        switch inputMode {
+        case .left:
+            startChainWithMemoryRecallItem()
+            
+        case .mathOperator:
+            // WIP CONTINUE HERE (faire display correctement au dessus déjà)
+            print("handleMemoryRecallAction mode  mathOperator not handled yet")
+            
+        case .rightFirst, .rightNext:
+            print("handleMemoryRecallAction wrong case reached : MR button should be disabled") // [?][!]
+            return
+            
+        case .mathOperatorNext:
+            print("handleMemoryRecallAction mode mathOperatorNext not handled yet")
+ 
+        }
+    }
+    
+    // [N] will replace tempResultline input if there is one
+    private func startChainWithMemoryRecallItem() {
+        guard let memo = popMemoryHandler.currentMemoryItem else { return }
+        tempResultLine = memo.result
+        leftOperand = memo.exp
+        do {
+            try popExpHandler.addPopExp(PopExp.fromMemoRecall(memo))
+        } catch {
+            return
+        }
+        displayResultLine()
+        inputMode = .mathOperatorNext
+    }
     
     private func digitPressed(_ key: PopData.PopKey) {
         switch inputMode {

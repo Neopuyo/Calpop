@@ -17,7 +17,7 @@
 		1D58C85A2C83262900FC2534 /* MemoryItemCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D58C8592C83262900FC2534 /* MemoryItemCellView.swift */; };
 		1D728F762C4BC5EE002A5A93 /* PopPadLeftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D728F752C4BC5EE002A5A93 /* PopPadLeftView.swift */; };
 		1D9126502C4CFC900087EAC2 /* PopPadMemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D91264F2C4CFC900087EAC2 /* PopPadMemoryView.swift */; };
-		1DBA1CE92C6B7F7000DB4190 /* PopMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DBA1CE82C6B7F7000DB4190 /* PopMemory.swift */; };
+		1DBA1CE92C6B7F7000DB4190 /* PopMemoryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DBA1CE82C6B7F7000DB4190 /* PopMemoryHandler.swift */; };
 		1DC147B52C42650E004B983D /* PoppingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC147B42C42650E004B983D /* PoppingView.swift */; };
 		1DC147B82C426633004B983D /* PoppingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC147B72C426633004B983D /* PoppingModel.swift */; };
 		1DC147BA2C426940004B983D /* PopData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC147B92C426940004B983D /* PopData.swift */; };
@@ -29,6 +29,8 @@
 		1DE4DB8A2C4D096A00B2CC44 /* KeyStringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE4DB892C4D096A00B2CC44 /* KeyStringView.swift */; };
 		1DE4DB8C2C4D0AF700B2CC44 /* KeySFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE4DB8B2C4D0AF700B2CC44 /* KeySFView.swift */; };
 		1DE4DB8E2C4D0BED00B2CC44 /* KeyMemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE4DB8D2C4D0BED00B2CC44 /* KeyMemoryView.swift */; };
+		1DF67EC42C8C48E100B244DE /* MemoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF67EC32C8C48E100B244DE /* MemoItem.swift */; };
+		1DF67EC62C8C497D00B244DE /* PopExpHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF67EC52C8C497D00B244DE /* PopExpHandler.swift */; };
 		1DFBFFC72C6CA1980010B53B /* PopComputer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFBFFC62C6CA1980010B53B /* PopComputer.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,7 +45,7 @@
 		1D58C8592C83262900FC2534 /* MemoryItemCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryItemCellView.swift; sourceTree = "<group>"; };
 		1D728F752C4BC5EE002A5A93 /* PopPadLeftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopPadLeftView.swift; sourceTree = "<group>"; };
 		1D91264F2C4CFC900087EAC2 /* PopPadMemoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopPadMemoryView.swift; sourceTree = "<group>"; };
-		1DBA1CE82C6B7F7000DB4190 /* PopMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopMemory.swift; sourceTree = "<group>"; };
+		1DBA1CE82C6B7F7000DB4190 /* PopMemoryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopMemoryHandler.swift; sourceTree = "<group>"; };
 		1DC147B42C42650E004B983D /* PoppingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoppingView.swift; sourceTree = "<group>"; };
 		1DC147B72C426633004B983D /* PoppingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoppingModel.swift; sourceTree = "<group>"; };
 		1DC147B92C426940004B983D /* PopData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopData.swift; sourceTree = "<group>"; };
@@ -55,6 +57,8 @@
 		1DE4DB892C4D096A00B2CC44 /* KeyStringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStringView.swift; sourceTree = "<group>"; };
 		1DE4DB8B2C4D0AF700B2CC44 /* KeySFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeySFView.swift; sourceTree = "<group>"; };
 		1DE4DB8D2C4D0BED00B2CC44 /* KeyMemoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyMemoryView.swift; sourceTree = "<group>"; };
+		1DF67EC32C8C48E100B244DE /* MemoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoItem.swift; sourceTree = "<group>"; };
+		1DF67EC52C8C497D00B244DE /* PopExpHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopExpHandler.swift; sourceTree = "<group>"; };
 		1DFBFFC62C6CA1980010B53B /* PopComputer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopComputer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -142,11 +146,10 @@
 		1DC147B62C4265ED004B983D /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1DC147B72C426633004B983D /* PoppingModel.swift */,
-				1DFBFFC62C6CA1980010B53B /* PopComputer.swift */,
+				1DF67EC22C8C487700B244DE /* Model Handlers */,
 				1DC147B92C426940004B983D /* PopData.swift */,
 				1D33478E2C5E33940094806E /* PopExp.swift */,
-				1DBA1CE82C6B7F7000DB4190 /* PopMemory.swift */,
+				1DF67EC32C8C48E100B244DE /* MemoItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -177,6 +180,17 @@
 				1DE4DB8D2C4D0BED00B2CC44 /* KeyMemoryView.swift */,
 			);
 			path = Keys;
+			sourceTree = "<group>";
+		};
+		1DF67EC22C8C487700B244DE /* Model Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				1DC147B72C426633004B983D /* PoppingModel.swift */,
+				1DFBFFC62C6CA1980010B53B /* PopComputer.swift */,
+				1DBA1CE82C6B7F7000DB4190 /* PopMemoryHandler.swift */,
+				1DF67EC52C8C497D00B244DE /* PopExpHandler.swift */,
+			);
+			path = "Model Handlers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,9 +271,11 @@
 			files = (
 				1DC147BC2C428035004B983D /* PopScreenView.swift in Sources */,
 				1D9126502C4CFC900087EAC2 /* PopPadMemoryView.swift in Sources */,
-				1DBA1CE92C6B7F7000DB4190 /* PopMemory.swift in Sources */,
+				1DBA1CE92C6B7F7000DB4190 /* PopMemoryHandler.swift in Sources */,
 				1D728F762C4BC5EE002A5A93 /* PopPadLeftView.swift in Sources */,
+				1DF67EC62C8C497D00B244DE /* PopExpHandler.swift in Sources */,
 				1D33478F2C5E33940094806E /* PopExp.swift in Sources */,
+				1DF67EC42C8C48E100B244DE /* MemoItem.swift in Sources */,
 				1DE4DB8C2C4D0AF700B2CC44 /* KeySFView.swift in Sources */,
 				1D58C85A2C83262900FC2534 /* MemoryItemCellView.swift in Sources */,
 				1DD499602C6CFA5F00C11E5D /* KeyMathView.swift in Sources */,

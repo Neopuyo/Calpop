@@ -18,17 +18,30 @@ struct MemoryStockMenuView: View {
     var body: some View {
         VStack {
            
-            List(popping.displayedMemoryStock) { memoItem in
-                
-                MemoryItemCellView(
-                    nextSelected: $nextSelected,
-                    memoItem: memoItem,
-                    isCurrent: isCurrent(memoItem)
+            List {
+                ForEach(popping.displayedMemoryStock) { memoItem in
+                    MemoryItemCellView(
+                        nextSelected: $nextSelected,
+                        memoItem: memoItem,
+                        isCurrent: isCurrent(memoItem)
                     ) { memoItem in
                         nextSelected = memoItem
                     }
+                }.onDelete(perform: { indexSet in
+                    popping.memoryAction(.delete(indexSet))
+                })
+                
+                    
             }
             
+            
+            
+            
+            
+            
+            
+            
+            // MARK : - temporary
             Spacer()
             HStack() {
                 Spacer()

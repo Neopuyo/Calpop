@@ -28,22 +28,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "881FF5A8-A85D-4DED-A6D8-2CC0A792B8BC"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "popping/Models/PopExp.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "202"
-            endingLineNumber = "202"
-            landmarkName = "addNegatePopExp()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "258A76D9-EDB9-4DBE-81C5-EC4D478104D8"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -51,8 +35,8 @@
             filePath = "popping/Models/PopComputer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "344"
-            endingLineNumber = "344"
+            startingLineNumber = "384"
+            endingLineNumber = "384"
             landmarkName = "resolveSpecialFunction(_:)"
             landmarkType = "7">
             <Locations>
@@ -99,8 +83,8 @@
             filePath = "popping/Models/PopComputer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "378"
-            endingLineNumber = "378"
+            startingLineNumber = "418"
+            endingLineNumber = "418"
             landmarkName = "evaluateCurrentExpression(nextOP:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -115,8 +99,8 @@
             filePath = "popping/Models/PopComputer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "393"
-            endingLineNumber = "393"
+            startingLineNumber = "433"
+            endingLineNumber = "433"
             landmarkName = "evaluateCurrentExpression(nextOP:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -131,8 +115,8 @@
             filePath = "popping/Models/PopComputer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "411"
-            endingLineNumber = "411"
+            startingLineNumber = "451"
+            endingLineNumber = "451"
             landmarkName = "evaluateExpression(from:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -140,49 +124,33 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1D444410-2A68-47D7-BC94-EB3105FF2D51"
+            uuid = "8BDAD669-12CF-41E8-8472-8AE08BD60086"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "popping/Models/PopExp.swift"
+            filePath = "popping/Models/PopMemory.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "274"
-            endingLineNumber = "274"
-            landmarkName = "addFirstNormalPopExpChain()"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "MemoItem"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0468E857-DD05-4D6A-980F-952CC7AF2139"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "popping/Models/Model Handlers/PopComputer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
+            landmarkName = "handleMemoryStockAction(method:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "1D444410-2A68-47D7-BC94-EB3105FF2D51 - 5b7c43d820e8ec9f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "popping.PopExpHandler.addFirstNormalPopExpChain() throws -&gt; ()"
-                  moduleName = "popping"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/loup/Files/Loup/Formations/DEV/iOSAppTrainning/popping/popping/Models/PopExp.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "265"
-                  endingLineNumber = "265"
-                  offsetFromSymbolStart = "284">
-               </Location>
-               <Location
-                  uuid = "1D444410-2A68-47D7-BC94-EB3105FF2D51 - 5b7c43d820e8ed7e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "popping.PopExpHandler.addFirstNormalPopExpChain() throws -&gt; ()"
-                  moduleName = "popping"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/loup/Files/Loup/Formations/DEV/iOSAppTrainning/popping/popping/Models/PopExp.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "264"
-                  endingLineNumber = "264"
-                  offsetFromSymbolStart = "284">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
