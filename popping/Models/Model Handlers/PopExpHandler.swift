@@ -55,8 +55,8 @@ class PopExpHandler : PopExpDelegate {
         case .inverse, .power2, .squareRoot, .percent:
             try addSpecialPopExp(popExp)
             
-        case .fromMemoRecall(let memoItem):
-            addPopExpFromMemoRecall(memoItem)
+        case .fromMemoRecall(let memo, let op):
+            addPopExpFromMemoRecall(memoItem: memo, operator: op)
             
         }
     }
@@ -144,13 +144,17 @@ class PopExpHandler : PopExpDelegate {
         isSingleValueStarting = true
     }
     
-    private func addPopExpFromMemoRecall(_ memoItem: MemoItem) {
-        popExps.append(PopExp.fromMemoRecall(memoItem))
+    private func addPopExpFromMemoRecall(memoItem memo: MemoItem, operator op:PopData.MathOperator?) {
+        popExps.append(PopExp.fromMemoRecall(memo, op))
         // [!] gérer le cas du isNegterminated, + autres fonctions spés ? dans le mode .left ça a l'air ok
         if popChain.isEmpty {
-            popChain = memoItem.exp
+            popChain = memo.exp
         } else  {
-            popChain = "\(popChain) + (\(memoItem.exp))"
+            guard let op = op else {
+                print("UNhandled ERROR addPopExpFromMemoRecall with nil op")
+                return
+            }
+            popChain = "\(popChain) \(op.computeSymbol) (\(memo.exp))"
         }
     }
     
@@ -186,8 +190,8 @@ class PopExpHandler : PopExpDelegate {
                 toPrint += "[\(n.leftOperand ?? "")\(n.leftOperand == nil ? "" : " ")\(n.mathOperator) \(n.rightOperand)]"
             case .singleValue(let v):
                 toPrint += "[\(v)]"
-            case .fromMemoRecall(let m):
-                toPrint += "[(MR~\(m.result))]"
+            case .fromMemoRecall(let m, let o):
+                toPrint += "[(MR(\(o?.computeSymbol ?? "nilOp")\(m.result))]"
             case.negate:
                 toPrint += "[negate]"
             case .inverse:

@@ -205,16 +205,11 @@ class PopComputer : PopComputerDelegate {
         case .left:
             startChainWithMemoryRecallItem()
             
-        case .mathOperator:
-            // WIP CONTINUE HERE (faire display correctement au dessus déjà)
-            print("handleMemoryRecallAction mode  mathOperator not handled yet")
+        case .mathOperator, .rightFirst:
+            computeWithMemoryRecallAsRightOperand(isNext: false)
             
-        case .rightFirst, .rightNext:
-            print("handleMemoryRecallAction wrong case reached : MR button should be disabled") // [?][!]
-            return
-            
-        case .mathOperatorNext:
-            print("handleMemoryRecallAction mode mathOperatorNext not handled yet")
+        case .mathOperatorNext, .rightNext:
+            computeWithMemoryRecallAsRightOperand(isNext: true)
  
         }
     }
@@ -225,12 +220,25 @@ class PopComputer : PopComputerDelegate {
         tempResultLine = memo.result
         leftOperand = memo.exp
         do {
-            try popExpHandler.addPopExp(PopExp.fromMemoRecall(memo))
+            try popExpHandler.addPopExp(PopExp.fromMemoRecall(memo, nil))
         } catch {
             return
         }
         displayResultLine()
         inputMode = .mathOperatorNext
+    }
+    
+    private func computeWithMemoryRecallAsRightOperand(isNext: Bool) {
+        guard let memo = popMemoryHandler.currentMemoryItem, let op = mathOperator else { return }
+        rightOperand = memo.exp
+        if !isNext {
+            do {
+                try popExpHandler.addPopExp(PopExp.fromMemoRecall(memo, op))
+            } catch {
+                return
+            }
+        }
+        evaluateCurrentExpression()
     }
     
     private func digitPressed(_ key: PopData.PopKey) {

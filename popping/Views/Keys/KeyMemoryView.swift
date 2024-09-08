@@ -31,9 +31,10 @@ struct KeyMemoryView: View {
              (.keyMplus, .rightFirst),  (.keyMplus, .rightNext),
              (.keyMminus, .rightFirst), (.keyMminus, .rightNext) :
             return true
-            
-        case (.keyMR, .rightFirst),      (.keyMR, .rightNext):
-            return true
+
+            // [N] call Recall will replace the temp input
+//        case (.keyMR, .rightFirst),      (.keyMR, .rightNext):
+//            return true
             
         case (.keyMS, _),
              (.keyMplus, _),
