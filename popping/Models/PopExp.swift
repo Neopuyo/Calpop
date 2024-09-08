@@ -10,7 +10,7 @@ import Foundation
 enum PopExp: Equatable {
     case normal(NormalPopExp)
     case singleValue(String)
-    case fromMemoRecall(MemoItem)
+    case fromMemoRecall(MemoItem, PopData.MathOperator?)
     case negate // +/-
     case inverse
     case power2
@@ -59,7 +59,7 @@ enum PopExp: Equatable {
     
     var isFromMemoRecall: Bool {
         switch (self) {
-        case .fromMemoRecall(_):
+        case .fromMemoRecall(_,_):
             return true
         default:
             return false

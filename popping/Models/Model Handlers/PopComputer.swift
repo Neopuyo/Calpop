@@ -66,11 +66,12 @@ class PopComputer : PopComputerDelegate {
     
     var refreshedExpressionLine: String {
         guard !isError else { return "" }
-        if inputMode == .mathOperator {
+        switch inputMode {
+        case .mathOperator:
             return "\(leftOperand ?? "??")"
-        } else if inputMode == .mathOperatorNext {
-            return "\(popExpHandler.prepareChain())" // [+] need better save method improvement display
-        } else {
+        case .mathOperatorNext:
+            return "\(popExpHandler.prepareChain())"
+        case .left, .rightNext, .rightFirst:
             return ""
         }
     }
@@ -205,16 +206,11 @@ class PopComputer : PopComputerDelegate {
         case .left:
             startChainWithMemoryRecallItem()
             
-        case .mathOperator:
-            // WIP CONTINUE HERE (faire display correctement au dessus déjà)
-            print("handleMemoryRecallAction mode  mathOperator not handled yet")
+        case .mathOperator, .rightFirst:
+            computeWithMemoryRecallAsRightOperand(isNext: false)
             
-        case .rightFirst, .rightNext:
-            print("handleMemoryRecallAction wrong case reached : MR button should be disabled") // [?][!]
-            return
-            
-        case .mathOperatorNext:
-            print("handleMemoryRecallAction mode mathOperatorNext not handled yet")
+        case .mathOperatorNext, .rightNext:
+            computeWithMemoryRecallAsRightOperand(isNext: true)
  
         }
     }
@@ -225,12 +221,25 @@ class PopComputer : PopComputerDelegate {
         tempResultLine = memo.result
         leftOperand = memo.exp
         do {
-            try popExpHandler.addPopExp(PopExp.fromMemoRecall(memo))
+            try popExpHandler.addPopExp(PopExp.fromMemoRecall(memo, nil))
         } catch {
             return
         }
         displayResultLine()
         inputMode = .mathOperatorNext
+    }
+    
+    private func computeWithMemoryRecallAsRightOperand(isNext: Bool) {
+        guard let memo = popMemoryHandler.currentMemoryItem, let op = mathOperator else { return }
+        rightOperand = memo.exp
+        if !isNext {
+            do {
+                try popExpHandler.addPopExp(PopExp.fromMemoRecall(memo, op))
+            } catch {
+                return
+            }
+        }
+        evaluateCurrentExpression()
     }
     
     private func digitPressed(_ key: PopData.PopKey) {
@@ -291,9 +300,9 @@ class PopComputer : PopComputerDelegate {
     
     private func resultPressed() {
         switch inputMode {
-        case .left:
+        case .left, .mathOperator:
             return
-        case .mathOperator, .mathOperatorNext:
+        case  .mathOperatorNext:
             return
         case .rightFirst, .rightNext:
             guard !tempResultLine.isEmpty else { return }
@@ -500,6 +509,20 @@ class PopComputer : PopComputerDelegate {
             isError = true
         }
     }
+    
+    // [N] WIP : Atempt if press Result in .left .mathop inputmode
+//    private func evaluateSingleValue() {
+//        guard !tempResultLine.isEmpty else { return }
+//        leftOperand = tempResultLine
+//        do {
+//            try popExpHandler.addPopExp(PopExp.singleValue(leftOperand!))
+//        } catch {
+//            return
+//        }
+//        tempExpressionLine = popExpHandler.prepareChain()
+//        displayExpLine()
+//        displayResultLine()
+//    }
     
     // [?] not used anymore ? later maybe ?
     private func evaluateExpression(from exp: String) -> String? {
