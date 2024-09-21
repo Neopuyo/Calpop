@@ -140,9 +140,6 @@ class PopMemoryHandler : PopMemoryDelegate {
     private func appendToCurrentMemoryItem(with expString: String, method : PopMemoryAction.Method) {
         guard currentMemoryItem != nil else { print("appendToCurrentMemoryItem : No current item"); return }  // [+][?] Should never happen
         currentMemoryItem?.appendExp(with: expString, method: method)
-        
-        // CONTINUE HERE WIP ISSUE after APPEND, Mmenu show wrong data ....
-        print("after Append -> currentMemoryItem = \(currentMemoryItem?.result ?? "nil")")
     }
     
     private func clearMemory() {

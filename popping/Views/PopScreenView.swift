@@ -65,23 +65,67 @@ struct PopScreenView: View {
                 
                 // Put a " " instead of empty string to fix height
                 Text(displayingExpLine)
-                    .font(.system(size: 25 * ratio , design: .rounded))
+                    .font(.system(size: 25 * ratio * expLineFactor, design: .rounded))
                     .foregroundStyle(Color.white)
-                    .lineLimit(1)
-                    .allowsTightening(false)
+                    .lineLimit(expLineLineLimit)
                     .frame(height: 50 * ratio, alignment: .trailing)
 
                 Spacer()
                     .frame(height: 5 * ratio)
                
                 Text(displayingResultLine)
-                    .font(.system(size: 90 * ratio , design: .default))
+                    .font(.system(size: 90 * ratio * resultLineFactor , design: .default))
                     .lineLimit(1)
-                    .frame(height: 75 * ratio, alignment: .trailing)
+                    .frame(maxWidth:.infinity, maxHeight: 75 * ratio, alignment: .trailing)
                     .foregroundStyle(Color.white)
 
             }
             .padding(20.0 * ratio)
+        }
+    }
+    
+    private var resultLineFactor: Double {
+        switch popping.displayedResultLine.count {
+        case  0..<8:
+            return 1.0
+        case  8..<12:
+            return 0.8
+        case 12..<16:
+            return 0.6
+        case 16..<20:
+            return 0.5
+        default:
+            return 0.35
+        }
+    }
+    
+    private var expLineFactor: Double {
+        switch popping.displayedExpressionLine.count {
+        case  0..<25:
+            return 1.0
+        case  25..<40:
+            return 0.9
+        case 40..<55:
+            return 0.8
+        case 55..<70:
+            return 0.7
+        default:
+            return 0.5
+        }
+    }
+    
+    private var expLineLineLimit: Int {
+        switch popping.displayedExpressionLine.count {
+        case  0..<25:
+            return 1
+        case  25..<40:
+            return 2
+        case 40..<55:
+            return 3
+        case 55..<70:
+            return 4
+        default:
+            return 4
         }
     }
 
