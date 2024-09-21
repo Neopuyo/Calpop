@@ -37,7 +37,7 @@ class PopExpHandler : PopExpDelegate {
     var hasNoNormalExp : Bool { countNormalExp == 0 }
     
     func prepareChain() -> String {
-        isNegTerminated ? "(\(popChain)) * -1" : popChain
+       isNegTerminated ? "(\(popChain)) * -1" : popChain
     }
     
 

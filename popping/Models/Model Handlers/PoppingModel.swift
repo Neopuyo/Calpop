@@ -92,6 +92,15 @@ class PoppingModel: ObservableObject {
         let sample = PoppingModel()
         sample.displayedExpressionLine = "634 + 85"
         sample.displayedResultLine = "719"
+        sample.displayedMemoryStock = [
+            MemoItem(exp: "15 + 5", result: "20.0"),
+           try! MemoItem(exp: "45 * 2"),
+            MemoItem(exp: "15 + 5", result: "20.0"),
+            MemoItem(exp: "15 + 5", result: "20.0"),
+            MemoItem(exp: "15 + 5", result: "20.0"),
+            MemoItem(exp: "15 + 5", result: "20.0"),
+        ]
+        sample.currentMemoryItem = sample.displayedMemoryStock.first
         return sample
     }
     

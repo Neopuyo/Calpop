@@ -13,35 +13,36 @@ struct MemoryStockMenuView: View {
     @EnvironmentObject var popping: PoppingModel
     @State private var nextSelected: MemoItem?
     
-    
+    // CONTINUE HERE get ratio / height from geo parent view !
     
     var body: some View {
         VStack {
-           
+            // HEADER
+            Rectangle()                
+                .fill(Color.mathBlue)
+                .frame(height:80)
+
+            // MEMORY LIST
             List {
                 ForEach(popping.displayedMemoryStock) { memoItem in
                     MemoryItemCellView(
-                        nextSelected: $nextSelected,
+                        height: 45,
                         memoItem: memoItem,
-                        isCurrent: isCurrent(memoItem)
+                        isActive: isActive(memoItem)
                     ) { memoItem in
                         nextSelected = memoItem
                     }
-                }.onDelete(perform: { indexSet in
+                }
+                .onDelete(perform: { indexSet in
                     popping.memoryAction(.delete(indexSet))
                 })
-                
-                    
+                .listRowInsets(EdgeInsets.init(top: 5, leading: 10, bottom: 5, trailing: 10))
+                .listRowSeparator(.hidden)
             }
+            .listStyle(.plain)
             
-            
-            
-            
-            
-            
-            
-            
-            // MARK : - temporary
+
+            // MARK : - [!] dirty temporary
             Spacer()
             HStack() {
                 Spacer()
@@ -65,15 +66,21 @@ struct MemoryStockMenuView: View {
                 .font(.caption)
             
         }
+        .ignoresSafeArea()
     }
     
-    private func isCurrent(_ memoItem: MemoItem) -> Bool {
+    // WIP CONTINUE HERE : try move isActive logic to have simpler cell / style view
+    private func isActive(_ memoItem: MemoItem) -> Bool {
+        if nextSelected != nil {
+          return nextSelected == memoItem
+        }
         guard let current = popping.currentMemoryItem else { return false }
         return memoItem == current
     }
 }
 
-#Preview {
+@available(iOS 17, *)
+#Preview(traits: .fixedLayout(width: 430, height: 932)) {
     MemoryStockMenuView()
         .environmentObject(PoppingModel.previewSampleData)
 }

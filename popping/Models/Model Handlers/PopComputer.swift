@@ -268,8 +268,17 @@ class PopComputer : PopComputerDelegate {
         case .rightNext:
             break
         }
-        tempResultLine.append(key.stringValue)
+        if key == .keyDot {
+            dotKeyHandling()
+        } else {
+            tempResultLine.append(key.stringValue)
+        }
         displayResultLine()
+    }
+    
+    private func  dotKeyHandling() {
+        guard !tempResultLine.contains(".") else { return }
+        tempResultLine.append(tempResultLine.isEmpty ? "0." : ".")
     }
     
     // No throw possible with negate case
@@ -306,34 +315,24 @@ class PopComputer : PopComputerDelegate {
             return
         case .rightFirst, .rightNext:
             guard !tempResultLine.isEmpty else { return }
-            rightOperand = tempResultLine
-            tempResultLine = ""
+            moveTempResultLineIntoRightOperand()
             evaluateCurrentExpression()
         }
     }
     
     private func leftSideFinished(with mathKey: PopData.PopKey) {
-        if tempResultLine.isEmpty {
-            leftOperand = "0"
-        } else {
-            leftOperand = tempResultLine
-            tempResultLine = ""
-        }
+        moveTempResultLIntoLeftOperand()
         setOrSwapOperator(with: mathKey)
         inputMode = .mathOperator
         displayExpLine()
         // update ResltLine too ?
     }
     
+   
+    
     // [+] check if func arg is needed here
     private func leftSideFinishedBySpecialFunc(_ speFunc: PopExp) {
-        if tempResultLine.isEmpty {
-            leftOperand = "0"
-        } else {
-            leftOperand = tempResultLine
-            tempResultLine = ""
-        }
-        
+        moveTempResultLIntoLeftOperand()
         do {
             try popExpHandler.addPopExp(PopExp.singleValue(leftOperand!))
         } catch {
@@ -345,7 +344,7 @@ class PopComputer : PopComputerDelegate {
     }
     
     private func resultLineToggledByNegate() {
-        if tempResultLine.isEmpty {
+        if tempResultLine.isEmpty || Double(tempResultLine) == 0.0 {
             return
         } else {
             if tempResultLine.first == "-" {
@@ -372,16 +371,31 @@ class PopComputer : PopComputerDelegate {
     
     private func rightSideFinished(with mathKey: PopData.PopKey) {
         guard !tempResultLine.isEmpty else { setOrSwapOperator(with: mathKey); return }
-        rightOperand = tempResultLine
-        tempResultLine = ""
+        moveTempResultLineIntoRightOperand()
         evaluateCurrentExpression(nextOP: PopData.MathOperator.getMathOperator(from: mathKey.stringValue))
     }
     
     private func rightSideFinishedBySpecialFunc(_ speFunc: PopExp) {
         guard mathOperator != nil else { return } // [+] error ?
-        rightOperand = tempResultLine
-        tempResultLine = ""
+        moveTempResultLineIntoRightOperand()
         evaluateCurrentExpression(nextOP: PopData.MathOperator.getMathOperator(from: mathOperator!.rawValue))
+    }
+    
+    // [N] ensure that expression is not dot terminated
+    private func moveTempResultLineIntoRightOperand() {
+        if tempResultLine.last == "." {
+            print("[moveTempResultLineIntoRightOperand()] adding '0' after last '.'")
+        }
+        rightOperand = tempResultLine.last == "." ? tempResultLine + "0" : tempResultLine
+        tempResultLine = ""
+    }
+    private func moveTempResultLIntoLeftOperand() {
+        if tempResultLine.isEmpty {
+            leftOperand = "0"
+        } else {
+            leftOperand = tempResultLine.last == "." ? tempResultLine + "0" : tempResultLine
+            tempResultLine = ""
+        }
     }
     
     private func resetNextMathOperator() {
@@ -485,7 +499,14 @@ class PopComputer : PopComputerDelegate {
             return
         }
         let isFirst: Bool = popExpHandler.hasNoNormalExp && !popExpHandler.isSingleValueStarting // [+] bien tester cet ajout conditionnel (&& !popExpHandler.isSingleValueStarting)
-        if !isFirst { leftOperand! = popExpHandler.prepareChain() }// get fresh leftOperand : [+] need RFC about left operand handle management ?
+        if !isFirst { leftOperand! = popExpHandler.prepareChain() } // get fresh leftOperand : [+] need RFC about left operand handle management ?
+        else if leftOperand!.last == "." { // [dot terminated]
+            print("[evaluateCurrentExpression()] leftOperand : adding '0' after last '.'")
+            leftOperand! += "0"
+        }
+        
+        
+        
         // [N] : The three following force unwraps are guaranted by the guard statement above
         let formatedLeft: String = formatInputBeforeEvaluate(leftOperand!)
         let formatedRight: String = formatInputBeforeEvaluate(rightOperand!)
@@ -543,7 +564,7 @@ class PopComputer : PopComputerDelegate {
             .replacingOccurrences(of: "􀅿", with: "/")
             .replacingOccurrences(of: "􀅼", with: "+")
             .replacingOccurrences(of: "􀅽", with: "-")
-        print("\(input)")
+        print("input : \(input)")
         return input
     }
     

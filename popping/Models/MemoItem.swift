@@ -15,16 +15,19 @@ class MemoItem {
     private(set) var exp: String = "" {
         didSet { computeResult() }
     }
+    
     private(set) var result: String = ""
     
     init(exp: String, result:String) {
-        self.exp = exp
+        self.exp = expFormated
         self.result = result
     }
     
+    private var expFormated : String { exp.last == "." ? exp + "0" : exp }
+    
     init(exp:String) throws {
-        self.exp = exp
-        let expression : Expression = Expression(exp)
+        self.exp = cleanDotTerminated(exp)
+        let expression : Expression = Expression(self.exp)
         do {
             let expressionResult: Double = try expression.evaluate()
             self.result = String(expressionResult)
@@ -38,8 +41,8 @@ class MemoItem {
     }
     
     private func computeResult() {
-        print("computeResult called exp: \(self.exp)")
-        let expression : Expression = Expression(exp)
+        print("computeResult called exp: \(self.expFormated)")
+        let expression : Expression = Expression(expFormated)
         do {
             let expressionResult: Double = try expression.evaluate()
             self.result = String(expressionResult)
@@ -47,6 +50,10 @@ class MemoItem {
         } catch {
             self.result = "ErrorResult"
         }
+    }
+    
+    private func cleanDotTerminated(_ exp: String) -> String {
+        exp.last == "." ? exp + "0" : exp
     }
 }
 
