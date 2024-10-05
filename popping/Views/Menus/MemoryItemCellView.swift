@@ -16,7 +16,36 @@ struct MemoryItemCellView: View {
     
     private var ratio: Double { height / 35.0 }
     
+    @ViewBuilder
     var body: some View {
+        if isActive {
+           activeCell
+        } else {
+           baseCell
+        }
+    }
+   
+    var activeCell: some View {
+        baseCell
+            .background(Color.menuBlue)
+            .clipShape(
+                RoundedRectangle(cornerRadius: ratio * 8, style: .continuous)
+            )
+            .overlay(
+                ZStack {
+                    RoundedRectangle(cornerRadius: ratio * 12, style: .continuous)
+                        .stroke(Color.specialBlue, lineWidth: ratio * 1)
+                    
+                    RoundedRectangle(cornerRadius: 2.5, style: .continuous)
+                        .fill(Color.mathBlue)
+                        .frame(width: ratio * 3, height: ratio * 20)
+                        .position(CGPoint(x: 0, y: height * 0.5))
+                    
+                }
+            )
+    }
+    
+    var baseCell: some View {
         HStack {
             Text(memoItem.exp)
                 .lineLimit(1)
@@ -29,26 +58,10 @@ struct MemoryItemCellView: View {
         }
         .padding(.horizontal)
         .frame(minHeight: height)
-        .background(isActive ? Color.menuBlue : Color.menuBlue.opacity(0.25))
+        .contentShape(Rectangle())
         .onTapGesture {
             isTap(memoItem)
         }
-        .clipShape(
-            RoundedRectangle(cornerRadius: ratio * 8, style: .continuous)
-        )
-        .overlay(
-            ZStack {
-                RoundedRectangle(cornerRadius: ratio * 12, style: .continuous)
-                    .stroke(Color.specialBlue, lineWidth: ratio * 1)
-                
-                RoundedRectangle(cornerRadius: 2.5, style: .continuous)
-                    .fill(isActive ? Color.mathBlue : Color.mathBlue.opacity(0.25))
-                    .frame(width: ratio * 3, height: ratio * 20)
-                    .position(CGPoint(x: 0, y: height * 0.5))
-                
-            }
-        )
-        
     }
 }
 
