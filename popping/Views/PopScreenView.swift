@@ -27,23 +27,6 @@ struct PopScreenView: View {
         
             VStack(alignment: .trailing, spacing:0) {
                 
-                
-                // Test Only ([+] set a test environnement variable to display debug items ?)
-//                Button("Check Values", systemImage: "arrow.up") {
-//                    popping.checkValues()
-//                }
-//                .foregroundStyle(.specialBlue)
-//                .font(.caption2)
-//                .frame(maxWidth: .infinity, alignment: .trailing)
-//                .padding(.trailing)
-//                
-//                Text(popping.displayedInputMode.rawValue)
-//                    .foregroundStyle(.specialBlue)
-//                    .font(.caption2)
-//                    .frame(maxWidth: .infinity, alignment: .trailing)
-//                    .padding(.trailing)
-                // ------------------------------------------------------------
-                
                 HStack(spacing:0) {
                     Button(action: {
                         popping.checkValues()

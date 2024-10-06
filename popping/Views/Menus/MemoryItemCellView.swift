@@ -20,8 +20,10 @@ struct MemoryItemCellView: View {
     var body: some View {
         if isActive {
            activeCell
+            .foregroundColor(Color.blackFixed)
         } else {
            baseCell
+            .foregroundColor(Color.blackToWhite)
         }
     }
    
@@ -33,14 +35,12 @@ struct MemoryItemCellView: View {
             )
             .overlay(
                 ZStack {
-                    RoundedRectangle(cornerRadius: ratio * 12, style: .continuous)
+                    RoundedRectangle(cornerRadius: ratio * 8, style: .continuous)
                         .stroke(Color.specialBlue, lineWidth: ratio * 1)
-                    
                     RoundedRectangle(cornerRadius: 2.5, style: .continuous)
                         .fill(Color.mathBlue)
                         .frame(width: ratio * 3, height: ratio * 20)
                         .position(CGPoint(x: 0, y: height * 0.5))
-                    
                 }
             )
     }

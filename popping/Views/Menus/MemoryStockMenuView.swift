@@ -13,20 +13,20 @@ struct MemoryStockMenuView: View {
     @EnvironmentObject var popping: PoppingModel
     @State private var nextSelected: MemoItem?
     
-    // CONTINUE HERE get ratio / height from geo parent view !
+    let heightRatio: Double
     
     var body: some View {
         VStack {
             // HEADER
             Rectangle()                
                 .fill(Color.mathBlue)
-                .frame(height:80)
+                .frame(height: 80 * heightRatio)
 
             // MEMORY LIST
             List {
                 ForEach(popping.displayedMemoryStock) { memoItem in
                     MemoryItemCellView(
-                        height: 45,
+                        height: 45 * heightRatio,
                         memoItem: memoItem,
                         isActive: isActive(memoItem)
                     ) { memoItem in
@@ -60,10 +60,11 @@ struct MemoryStockMenuView: View {
                 }
                 Spacer()
                 
-            }.font(.title)
-            
-            Text("Next Selected Memo item : \(nextSelected?.result ?? "nil")")
-                .font(.caption)
+            }
+            .padding(.vertical)
+            .background(Color.specialBlue)
+            .foregroundColor(Color.whiteToBlack)
+            .font(.largeTitle)
             
         }
         .ignoresSafeArea()
@@ -81,6 +82,6 @@ struct MemoryStockMenuView: View {
 
 @available(iOS 17, *)
 #Preview(traits: .fixedLayout(width: 430, height: 932)) {
-    MemoryStockMenuView()
+    MemoryStockMenuView(heightRatio: 1.0)
         .environmentObject(PoppingModel.previewSampleData)
 }

@@ -42,7 +42,7 @@ struct PoppingView: View {
             .ignoresSafeArea()
             .padding(.horizontal, geo.size.height * 17 / 932 )
             .sheet(isPresented: $popping.showMemoryPannel, content: {
-                MemoryStockMenuView()
+                MemoryStockMenuView(heightRatio: geo.size.height / 932)
             })
         }
     }
