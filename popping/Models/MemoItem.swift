@@ -27,7 +27,7 @@ class MemoItem {
     
     init(exp:String) throws {
         self.exp = cleanDotTerminated(exp)
-        let expression : Expression = Expression(self.exp)
+        let expression : NumericExpression = Expression(self.exp)
         do {
             let expressionResult: Double = try expression.evaluate()
             self.result = String(expressionResult)
@@ -42,7 +42,7 @@ class MemoItem {
     
     private func computeResult() {
         print("computeResult called exp: \(self.expFormated)")
-        let expression : Expression = Expression(expFormated)
+        let expression : NumericExpression = Expression(expFormated)
         do {
             let expressionResult: Double = try expression.evaluate()
             self.result = String(expressionResult)

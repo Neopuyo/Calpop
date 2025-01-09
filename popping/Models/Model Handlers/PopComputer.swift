@@ -512,7 +512,7 @@ class PopComputer : PopComputerDelegate {
         let formatedRight: String = formatInputBeforeEvaluate(rightOperand!)
         let expressionString: String = mathOperator!.isPrioritary ? "(\(formatedLeft)) \(mathOperator!.computeSymbol) \(formatedRight)" : "\(formatedLeft) \(mathOperator!.computeSymbol) \(formatedRight)"
         
-        let expression : Expression = Expression(expressionString)
+        let expression : NumericExpression = Expression(expressionString)
         do {
             let expressionResult: Double = try expression.evaluate()
             let normalExp = NormalPopExp(leftOperand: isFirst ? leftOperand : nil, mathOperator: mathOperator!, rightOperand: rightOperand!)
@@ -547,7 +547,7 @@ class PopComputer : PopComputerDelegate {
     
     // [?] not used anymore ? later maybe ?
     private func evaluateExpression(from exp: String) -> String? {
-        let expression : Expression = Expression(exp)
+        let expression : NumericExpression = Expression(exp)
         do {
             let expressionResult: Double = try expression.evaluate()
             return String(expressionResult)

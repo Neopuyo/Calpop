@@ -14,12 +14,6 @@ struct PoppingView: View {
     var body: some View {
         GeometryReader { geo in
             VStack(spacing:0) {
-                
-                // HEADER
-                Spacer()
-                    .frame(height: geo.size.height * 58 / 932)
-                
-                
                 // SCREEN
                 PopScreenView(ratio: geo.size.height / 932)
                     .frame(height: geo.size.height * 286 / 932)
@@ -28,18 +22,11 @@ struct PoppingView: View {
                 Spacer()
                     .frame(height: geo.size.height * 38 / 932)
                 
-                
-                // PADS
+                // PAD
                 PopPadView()
-//                    .frame(height: geo.size.height * 0.45)
-                
-                
-                // FOOTER
-                Spacer()
-                    .frame(height: geo.size.height * 38 / 932)
+                    .padding(.bottom, geo.size.height * 17 / 932)
                 
             }
-            .ignoresSafeArea()
             .padding(.horizontal, geo.size.height * 17 / 932 )
             .sheet(isPresented: $popping.showMemoryPannel, content: {
                 MemoryStockMenuView(heightRatio: geo.size.height / 932)
@@ -47,6 +34,10 @@ struct PoppingView: View {
         }
     }
 }
+
+
+        
+    
 
 #Preview {
     PoppingView()
